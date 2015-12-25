@@ -94,8 +94,12 @@ func main() {
 				if err != nil {
 					fmt.Println(err)
 				}
+				// change the working directory to were ffmpeg lives
 				os.Chdir(filepath.Join(path, ffmpeg))
-				vfile := filepath.Join(mp3Folder+strings.Replace(filepath.Join(videoDirectoryPath, videos[0]), path, "", -1)) + ".mp3"
+
+				vfile := strings.Replace(filepath.Join(mp3Folder+strings.Replace(filepath.Join(videoDirectoryPath, videos[0]), videoDirectoryPath, "", -1)), ".mp4", ".mp3", -1)
+
+				fmt.Println(vfile)
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", filepath.Join(videoDirectoryPath, videos[0]), vfile)
 				err = cmd.Run()
 				fmt.Println(err)
