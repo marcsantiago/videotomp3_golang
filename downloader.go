@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
-	_ "strings"
+	"strings"
 	//"io"
 	//"net/http"
 	//"net/url"
@@ -25,10 +25,20 @@ func (i *arrayFlags) Set(value string) error {
 	return nil
 }
 
+type VideoFilePaths struct {
+	files []string
+}
+
+func (v *VideoFilePaths) add(filepath string) []string {
+	v.files = append(v.files, filepath)
+	return v.files
+}
+
 var urlStrings arrayFlags
 var videoFolder = "video_downloads"
 var mp3Folder = "mp3_files"
-var youtubeFodler = "youtube-dl-master"
+var youtubeFolder = "youtube-dl-master"
+var ffmpeg = "ffmpeg-2.8.4"
 
 func main() {
 	// get the absolute path of the script in order to create a video directory if it doesn't exist
@@ -57,20 +67,22 @@ func main() {
 		os.Mkdir(mp3DirectoryPath, 0777)
 	}
 
-	youtubeDirectoryPath := filepath.Join(path, youtubeFodler)
+	youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
 
 	var fileMode = flag.Bool("f", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
 	flag.Parse()
 
-	// section of code dealing with the downloading of vidoes off of youtube
-	// change the directory to the directory of the videodown
-	err = os.Chdir(youtubeDirectoryPath)
+	// section of code dealing with the downloading of videos off of youtube
+	// create a list of file names of vidoes
+	//var videofiles []string
+	//var videofiles VideoFilePaths
 	if *fileMode == false {
 		for _, url := range urlStrings {
+			// change the directory to the directory of the videodown
+			os.Chdir(youtubeDirectoryPath)
 			if runtime.GOOS == "windows" {
-				fmt.Println("Hello from Windows")
-				fmt.Println(url)
+				//TODO
 			} else {
 				// download the video file using the python youtube downloader
 				cmd := exec.Command("/bin/sh", "-c", "python -m youtube_dl "+url)
@@ -78,13 +90,32 @@ func main() {
 				// move the file the the vidoes directory
 				videos := checkExt(".mp4")
 				err := os.Rename(filepath.Join(youtubeDirectoryPath, videos[0]), filepath.Join(videoDirectoryPath, videos[0]))
+				//videofiles.add(filepath.Join(videoDirectoryPath, videos[0]))
 				if err != nil {
 					fmt.Println(err)
-					return
 				}
+				os.Chdir(filepath.Join(path, ffmpeg))
+				vfile := filepath.Join(mp3Folder + strings.Replace(videoFile, path, "", -1))
+				cmd := exec.Command("/bin/sh", "-c", "/ffmpeg -i %s %s", filepath.Join(videoDirectoryPath, videos[0]), vfile)
+				err = cmd.Run()
+				fmt.Println(err)
 			}
 		}
+	} else {
+		//TODO
 	}
+	//test
+	// videofiles.add("/Users/marcsantiago/Desktop/videotomp3_golang/video_downloads/Day\\ 24\\ -\\ Kendall\\ Jenner\\ by\\ James\\ Lima\\ \\ \\(LOVE\\ Advent\\ 2015\\)-AmeSgBd-KVE.mp4 ")
+	//   os.Chdir(filepath.Join(path, ffmpeg))
+	//   //ffmpeg -i filename.mp4 filename.mp3
+	//   for _, videoFile := range videofiles.files {
+	//     vfile := mp3Folder + strings.Replace(videoFile, path, "", -1)
+	//     fmt.Println(vfile)
+	//     cmd := exec.Command("./ffmpeg -i", videoFile+" "+vfile)
+	//     err := cmd.Run()
+	//     fmt.Println(err)
+	//   }
+
 }
 
 func folderExists(path string) (bool, error) {
