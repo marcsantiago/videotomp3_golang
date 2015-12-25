@@ -87,20 +87,30 @@ func main() {
 				// download the video file using the python youtube downloader
 				cmd := exec.Command("/bin/sh", "-c", "python -m youtube_dl "+url)
 				cmd.Run()
-				// move the file the the vidoes directory
+
 				videos := checkExt(".mp4")
-				err := os.Rename(filepath.Join(youtubeDirectoryPath, videos[0]), filepath.Join(videoDirectoryPath, videos[0]))
+				oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
+				newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
+
+				// move the file the the vidoes directory
+				err := os.Rename(oldVideoPath, newVideoPath)
 				//videofiles.add(filepath.Join(videoDirectoryPath, videos[0]))
 				if err != nil {
 					fmt.Println(err)
 				}
+
 				// change the working directory to were ffmpeg lives
 				os.Chdir(filepath.Join(path, ffmpeg))
+				//remove the path from the movie name and change it's path
+				newVideoFileName := strings.replace(oldVideoPath, videoDirectoryPath, "", -1)
+				newVideoFileName = strings.replace(newVideoFileName, ".mp4", ".mp3", -1)
+				oldVideoPath = newVideoPath
+				newVideoPath = filepath.Join(path, mp3Folder)
+				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
 
-				vfile := strings.Replace(filepath.Join(mp3Folder+strings.Replace(filepath.Join(videoDirectoryPath, videos[0]), videoDirectoryPath, "", -1)), ".mp4", ".mp3", -1)
-
-				fmt.Println(vfile)
-				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", filepath.Join(videoDirectoryPath, videos[0]), vfile)
+				fmt.Println(oldVideoPath)
+				fmt.Println(newVideoPath)
+				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
 				err = cmd.Run()
 				fmt.Println(err)
 			}
