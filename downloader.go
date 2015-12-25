@@ -160,3 +160,7 @@ func checkExt(ext string) []string {
 	})
 	return files
 }
+
+func confirmUrl(url string) (bool, string) {
+
+}
