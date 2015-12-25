@@ -95,8 +95,8 @@ func main() {
 					fmt.Println(err)
 				}
 				os.Chdir(filepath.Join(path, ffmpeg))
-				vfile := filepath.Join(mp3Folder + strings.Replace(videoFile, path, "", -1))
-				cmd := exec.Command("/bin/sh", "-c", "/ffmpeg -i %s %s", filepath.Join(videoDirectoryPath, videos[0]), vfile)
+				vfile := filepath.Join(mp3Folder+strings.Replace(filepath.Join(videoDirectoryPath, videos[0]), path, "", -1)) + ".mp3"
+				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", filepath.Join(videoDirectoryPath, videos[0]), vfile)
 				err = cmd.Run()
 				fmt.Println(err)
 			}
@@ -106,7 +106,7 @@ func main() {
 	}
 	//test
 	// videofiles.add("/Users/marcsantiago/Desktop/videotomp3_golang/video_downloads/Day\\ 24\\ -\\ Kendall\\ Jenner\\ by\\ James\\ Lima\\ \\ \\(LOVE\\ Advent\\ 2015\\)-AmeSgBd-KVE.mp4 ")
-	//   os.Chdir(filepath.Join(path, ffmpeg))
+	//   exit status 127
 	//   //ffmpeg -i filename.mp4 filename.mp3
 	//   for _, videoFile := range videofiles.files {
 	//     vfile := mp3Folder + strings.Replace(videoFile, path, "", -1)
