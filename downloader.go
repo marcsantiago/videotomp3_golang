@@ -102,13 +102,16 @@ func main() {
 				// change the working directory to were ffmpeg lives
 				os.Chdir(filepath.Join(path, ffmpeg))
 				//remove the path from the movie name and change it's path
-				newVideoFileName := strings.replace(oldVideoPath, videoDirectoryPath, "", -1)
-				newVideoFileName = strings.replace(newVideoFileName, ".mp4", ".mp3", -1)
+				newVideoFileName := strings.Replace(oldVideoPath, videoDirectoryPath, "", -1)
+				newVideoFileName = strings.Replace(newVideoFileName, ".mp4", ".mp3", -1)
 				oldVideoPath = newVideoPath
 				newVideoPath = filepath.Join(path, mp3Folder)
 				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
 
 				fmt.Println(oldVideoPath)
+				// fix the new path it's returning
+				//Users/marcsantiago/desktop/videotomp3_golang/youtube-dl-master/Day 24 - Kendall Jenner by James Lima  (LOVE Advent 2015)-AmeSgBd-KVE.mp3
+
 				fmt.Println(newVideoPath)
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
 				err = cmd.Run()
@@ -123,7 +126,7 @@ func main() {
 	//   exit status 127
 	//   //ffmpeg -i filename.mp4 filename.mp3
 	//   for _, videoFile := range videofiles.files {
-	//     vfile := mp3Folder + strings.Replace(videoFile, path, "", -1)
+	//     vfile := mp3Folder + strings.  Replace(videoFile, path, "", -1)
 	//     fmt.Println(vfile)
 	//     cmd := exec.Command("./ffmpeg -i", videoFile+" "+vfile)
 	//     err := cmd.Run()
@@ -162,5 +165,5 @@ func checkExt(ext string) []string {
 }
 
 func confirmUrl(url string) (bool, string) {
-
+	return true, ""
 }
