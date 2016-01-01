@@ -107,8 +107,8 @@ func main() {
 				oldVideoPath = newVideoPath
 				newVideoPath = filepath.Join(path, mp3Folder)
 				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
+				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "video_downloads", -1)
 
-				fmt.Println(oldVideoPath)
 				// fix the new path it's returning
 				//Users/marcsantiago/desktop/videotomp3_golang/youtube-dl-master/Day 24 - Kendall Jenner by James Lima  (LOVE Advent 2015)-AmeSgBd-KVE.mp3
 
