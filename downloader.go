@@ -9,9 +9,7 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
-	//"io"
-	//"net/http"
-	//"net/url"
+	"time"
 )
 
 type arrayFlags []string
@@ -106,13 +104,36 @@ func main() {
 				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
 				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "mp3_files", -1)
 
-				fmt.Println(oldVideoPath)
+				//make sure the file in the directory before executing the command
+				os.Chdir(oldVideoPath)
+				stop := 0
+				for {
+					videos = checkExt(".mp4")
+					if len(videos) > 0 {
+						for _, vidName := range videos {
+							if strings.Contains(vidName, strings.Replace(newVideoFileName, ".mp3", ".mp4", -1)) {
+								break
+							} else {
+								time.Sleep(1000 * time.Millisecond)
+								stop++
+							}
+						}
+					} else {
+						time.Sleep(1000 * time.Millisecond)
+						stop++
+					}
+					if stop > 10 {
+						break
+					}
+				}
 				//Ensure path is located where the binaries live
 				os.Chdir(path)
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
 				err = cmd.Run()
 				if err != nil {
-					fmt.Println(err)
+					fmt.Printf("Error Running ffmpeg: %v\n", err)
+				} else {
+					err = os.Remove(oldVideoPath)
 				}
 			}
 		}
