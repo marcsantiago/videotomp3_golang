@@ -82,9 +82,10 @@ func main() {
 			} else {
 				//MAC ENVIRONMENT BINARIES
 				// download the video file using the python youtube downloader
+				fmt.Printf("Downloading video %s\n", url)
 				cmd := exec.Command("/bin/sh", "-c", "python -m youtube_dl "+url)
 				cmd.Run()
-
+				fmt.Printf("Downloading video complete%s\n", url)
 				videos := checkExt(".mp4")
 				oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
 				newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
@@ -105,34 +106,41 @@ func main() {
 				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "mp3_files", -1)
 
 				//make sure the file in the directory before executing the command
-				os.Chdir(oldVideoPath)
+				fmt.Printf("confirming paths %s\n", url)
+				os.Chdir(videoDirectoryPath)
 				stop := 0
 				for {
 					videos = checkExt(".mp4")
 					if len(videos) > 0 {
 						for _, vidName := range videos {
-							if strings.Contains(vidName, strings.Replace(newVideoFileName, ".mp3", ".mp4", -1)) {
+							if strings.Contains(strings.Replace(newVideoFileName, ".mp3", ".mp4", -1), vidName) {
 								break
 							} else {
+								fmt.Printf("Video not found\n")
 								time.Sleep(1000 * time.Millisecond)
 								stop++
 							}
 						}
 					} else {
+						fmt.Printf("Nothing in folder\n")
 						time.Sleep(1000 * time.Millisecond)
 						stop++
 					}
-					if stop > 10 {
+					if stop > 15 {
 						break
 					}
 				}
+				fmt.Printf("Paths confirmed\n")
+
 				//Ensure path is located where the binaries live
 				os.Chdir(path)
+				fmt.Printf("Converting video to mp3\n")
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
 				err = cmd.Run()
 				if err != nil {
 					fmt.Printf("Error Running ffmpeg: %v\n", err)
 				} else {
+					fmt.Printf("Removing video\n")
 					err = os.Remove(oldVideoPath)
 				}
 			}
