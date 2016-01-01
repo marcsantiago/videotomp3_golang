@@ -1,4 +1,4 @@
-# ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxvid
+# ./configure 
 ALL_COMPONENTS='
     aac_adtstoasc_bsf
 chomp_bsf
@@ -1556,8 +1556,8 @@ ATOMICS_LIST='
 '
 Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.eccDZA5ULm/Render
 BASH=/bin/sh
-BASH_ARGC=([0]="13")
-BASH_ARGV=([0]="--enable-libxvid" [1]="--enable-libx264" [2]="--enable-libvpx" [3]="--enable-libvorbis" [4]="--enable-libtheora" [5]="--enable-libopus" [6]="--enable-libmp3lame" [7]="--enable-libfreetype" [8]="--enable-libfdk-aac" [9]="--enable-libass" [10]="--enable-nonfree" [11]="--enable-gpl" [12]="--prefix=/usr/local")
+BASH_ARGC=()
+BASH_ARGV=()
 BASH_LINENO=([0]="0")
 BASH_SOURCE=([0]="./configure")
 BASH_VERSINFO=([0]="3" [1]="2" [2]="57" [3]="1" [4]="release" [5]="x86_64-apple-darwin15")
@@ -3163,7 +3163,6 @@ FEATURE_LIST='
     static
     swscale_alpha
 '
-FFMPEG_CONFIGURATION='--prefix=/usr/local --enable-gpl --enable-nonfree --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxvid'
 FILTER_LIST='acrossfade_filter
 adelay_filter
 aecho_filter
@@ -4161,7 +4160,7 @@ PATHS_LIST='
 '
 PIPESTATUS=([0]="0")
 POSIXLY_CORRECT=y
-PPID=52813
+PPID=52736
 PROGRAM_LIST='
     ffplay
     ffprobe
@@ -4298,7 +4297,7 @@ SYSTEM_FUNCS='
 TERM=xterm-256color
 TERM_PROGRAM=Apple_Terminal
 TERM_PROGRAM_VERSION=361.1
-TERM_SESSION_ID=402BB939-3E52-4CF5-8128-C01B4528DFBD
+TERM_SESSION_ID=106EE766-CAE7-4E4D-836F-4B3EBFA6420E
 THREADS_LIST='
     pthreads
     os2threads
@@ -4349,7 +4348,7 @@ UID=501
 USER=marcsantiago
 XPC_FLAGS=0x0
 XPC_SERVICE_NAME=0
-_='# ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxvid'
+_='# ./configure '
 __CF_USER_TEXT_ENCODING=0x1F5:0:0
 a64_muxer=yes
 a64multi5_encoder=yes
@@ -4382,7 +4381,6 @@ ac3_muxer=yes
 ac3_parser=yes
 acrossfade_filter=yes
 act_demuxer=yes
-action=enable
 adelay_filter=yes
 adf_demuxer=yes
 adp_demuxer=yes
@@ -6154,7 +6152,6 @@ gif_encoder=yes
 gif_muxer=yes
 gopher_protocol=yes
 gopher_protocol_select=network
-gpl=yes
 gradfun_filter=yes
 gsm_decoder=yes
 gsm_demuxer=yes
@@ -6471,7 +6468,6 @@ kerndeint_filter=yes
 kerndeint_filter_deps=gpl
 kgv1_decoder=yes
 kmvc_decoder=yes
-l=
 ladspa_filter=yes
 ladspa_filter_deps='ladspa dlopen'
 lagarith_decoder=yes
@@ -6486,7 +6482,6 @@ ldflags_filter=echo
 lenscorrection_filter=yes
 libaacplus_encoder=yes
 libaacplus_encoder_deps=libaacplus
-libass=yes
 libcdio_indev=yes
 libcdio_indev_deps=libcdio
 libcelt_decoder=yes
@@ -6499,13 +6494,11 @@ libdir_default='${prefix}/lib'
 libfaac_encoder=yes
 libfaac_encoder_deps=libfaac
 libfaac_encoder_select=audio_frame_queue
-libfdk_aac=yes
 libfdk_aac_decoder=yes
 libfdk_aac_decoder_deps=libfdk_aac
 libfdk_aac_encoder=yes
 libfdk_aac_encoder_deps=libfdk_aac
 libfdk_aac_encoder_select=audio_frame_queue
-libfreetype=yes
 libgme_demuxer=yes
 libgme_demuxer_deps=libgme
 libgsm_decoder=yes
@@ -6524,7 +6517,6 @@ libkvazaar_encoder=yes
 libkvazaar_encoder_deps=libkvazaar
 libmodplug_demuxer=yes
 libmodplug_demuxer_deps=libmodplug
-libmp3lame=yes
 libmp3lame_encoder=yes
 libmp3lame_encoder_deps=libmp3lame
 libmp3lame_encoder_select=audio_frame_queue
@@ -6545,7 +6537,6 @@ libopenjpeg_decoder=yes
 libopenjpeg_decoder_deps=libopenjpeg
 libopenjpeg_encoder=yes
 libopenjpeg_encoder_deps=libopenjpeg
-libopus=yes
 libopus_decoder=yes
 libopus_decoder_deps=libopus
 libopus_encoder=yes
@@ -6581,7 +6572,6 @@ libssh_protocol=yes
 libssh_protocol_deps=libssh
 libstagefright_h264_decoder=yes
 libstagefright_h264_decoder_deps=libstagefright_h264
-libtheora=yes
 libtheora_encoder=yes
 libtheora_encoder_deps=libtheora
 libtwolame_encoder=yes
@@ -6596,13 +6586,11 @@ libvo_aacenc_encoder_deps=libvo_aacenc
 libvo_aacenc_encoder_select=audio_frame_queue
 libvo_amrwbenc_encoder=yes
 libvo_amrwbenc_encoder_deps=libvo_amrwbenc
-libvorbis=yes
 libvorbis_decoder=yes
 libvorbis_decoder_deps=libvorbis
 libvorbis_encoder=yes
 libvorbis_encoder_deps=libvorbis
 libvorbis_encoder_select=audio_frame_queue
-libvpx=yes
 libvpx_vp8_decoder=yes
 libvpx_vp8_decoder_deps=libvpx
 libvpx_vp8_encoder=yes
@@ -6619,7 +6607,6 @@ libwebp_encoder=yes
 libwebp_encoder_deps=libwebp
 libx262_encoder=yes
 libx262_encoder_deps=libx262
-libx264=yes
 libx264_encoder=yes
 libx264_encoder_deps=libx264
 libx264rgb_encoder=yes
@@ -6629,7 +6616,6 @@ libx265_encoder=yes
 libx265_encoder_deps=libx265
 libxavs_encoder=yes
 libxavs_encoder_deps=libxavs
-libxvid=yes
 libxvid_encoder=yes
 libxvid_encoder_deps=libxvid
 libzvbi_teletext_decoder=yes
@@ -7103,7 +7089,6 @@ nm_default='nm -g'
 noformat_filter=yes
 noise_bsf=yes
 noise_filter=yes
-nonfree=yes
 nsv_demuxer=yes
 null_filter=yes
 null_muxer=yes
@@ -7139,11 +7124,8 @@ openal_indev=yes
 openal_indev_deps=openal
 opengl_outdev=yes
 opengl_outdev_deps=opengl
-opt=--enable-libxvid
+opt=sws_max_filter_size
 optimizations=yes
-option=libxvid
-optname=prefix
-optval=--enable-libxvid
 opus_decoder=yes
 opus_decoder_deps=swresample
 opus_decoder_select=imdct15
@@ -7353,7 +7335,6 @@ ppc4xx=yes
 ppc4xx_deps=ppc
 ppm_decoder=yes
 ppm_encoder=yes
-prefix=/usr/local
 prefix_default=/usr/local
 prores_aw_encoder=yes
 prores_decoder=yes
@@ -7436,7 +7417,6 @@ qtkit_indev_select=qtkit
 qtrle_decoder=yes
 qtrle_encoder=yes
 quotes='""'
-r=--enable-libxvid
 r10k_decoder=yes
 r10k_encoder=yes
 r210_decoder=yes
@@ -7854,7 +7834,7 @@ vaapi_deps=va_va_h
 valgrind_backtrace=yes
 valgrind_backtrace_deps='!optimizations valgrind_valgrind_h'
 value=yes
-var=libxvid
+var=mmi
 vb_decoder=yes
 vble_decoder=yes
 vble_decoder_select=huffyuvdsp
@@ -8097,411 +8077,411 @@ zmq_filter_deps=libzmq
 zoompan_filter=yes
 zoompan_filter_deps=swscale
 mktemp -u XXXXXX
-Rs7VCS
+BSBtLv
 check_ld cc
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int main(void){ return 0; }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cWSnRWF3 /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.6ZnFPR2c /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o
 check_cflags -std=c99
 test_cflags -std=c99
 check_cc -std=c99
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc -D_FILE_OFFSET_BITS=64
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <stdlib.h>
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -D_FILE_OFFSET_BITS=64 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -D_FILE_OFFSET_BITS=64 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc -D_LARGEFILE_SOURCE
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <stdlib.h>
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -std=c99 -D_LARGEFILE_SOURCE -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -std=c99 -D_LARGEFILE_SOURCE -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_host_cflags -std=c99
 check_host_cc -std=c99
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_host_cflags -Wall
 check_host_cc -Wall
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -std=c99 -Wall -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -std=c99 -Wall -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_host_cflags -O3
 check_host_cc -O3
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -std=c99 -Wall -O3 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -std=c99 -Wall -O3 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_code cc  int test[2*(sizeof(void *) > 4) - 1]
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int main(void) { int test[2*(sizeof(void *) > 4) - 1]; return 0; }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cpp_condition features.h defined __UCLIBC__
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <features.h>
     2	#if !(defined __UCLIBC__)
     3	#error "unsatisfied condition: defined __UCLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'features.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'features.h' file not found
 #include <features.h>
          ^
 1 error generated.
 check_cpp_condition features.h defined __GLIBC__
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <features.h>
     2	#if !(defined __GLIBC__)
     3	#error "unsatisfied condition: defined __GLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'features.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'features.h' file not found
 #include <features.h>
          ^
 1 error generated.
 check_cpp_condition newlib.h defined _NEWLIB_VERSION
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <newlib.h>
     2	#if !(defined _NEWLIB_VERSION)
     3	#error "unsatisfied condition: defined _NEWLIB_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'newlib.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'newlib.h' file not found
 #include <newlib.h>
          ^
 1 error generated.
 check_cpp_condition _mingw.h defined __MINGW64_VERSION_MAJOR
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW64_VERSION_MAJOR)
     3	#error "unsatisfied condition: defined __MINGW64_VERSION_MAJOR"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_cpp_condition _mingw.h defined __MINGW_VERSION
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW_VERSION)
     3	#error "unsatisfied condition: defined __MINGW_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_cpp_condition _mingw.h defined __MINGW32_VERSION
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW32_VERSION)
     3	#error "unsatisfied condition: defined __MINGW32_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_cpp_condition crtversion.h defined _VC_CRT_MAJOR_VERSION
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <crtversion.h>
     2	#if !(defined _VC_CRT_MAJOR_VERSION)
     3	#error "unsatisfied condition: defined _VC_CRT_MAJOR_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'crtversion.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'crtversion.h' file not found
 #include <crtversion.h>
          ^
 1 error generated.
 check_cpp_condition stddef.h defined __KLIBC__
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <stddef.h>
     2	#if !(defined __KLIBC__)
     3	#error "unsatisfied condition: defined __KLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:3:2: error: "unsatisfied condition: defined __KLIBC__"
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:3:2: error: "unsatisfied condition: defined __KLIBC__"
 #error "unsatisfied condition: defined __KLIBC__"
  ^
 1 error generated.
 check_cpp_condition sys/cdefs.h defined __BIONIC__
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <sys/cdefs.h>
     2	#if !(defined __BIONIC__)
     3	#error "unsatisfied condition: defined __BIONIC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:3:2: error: "unsatisfied condition: defined __BIONIC__"
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:3:2: error: "unsatisfied condition: defined __BIONIC__"
 #error "unsatisfied condition: defined __BIONIC__"
  ^
 1 error generated.
 check_cpp_condition sys/brand.h defined LABELED_BRAND_NAME
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <sys/brand.h>
     2	#if !(defined LABELED_BRAND_NAME)
     3	#error "unsatisfied condition: defined LABELED_BRAND_NAME"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'sys/brand.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'sys/brand.h' file not found
 #include <sys/brand.h>
          ^
 1 error generated.
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <time.h>
     2	void *v = localtime_r;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_host_cpp_condition features.h defined __UCLIBC__
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <features.h>
     2	#if !(defined __UCLIBC__)
     3	#error "unsatisfied condition: defined __UCLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'features.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'features.h' file not found
 #include <features.h>
          ^
 1 error generated.
 check_host_cpp_condition features.h defined __GLIBC__
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <features.h>
     2	#if !(defined __GLIBC__)
     3	#error "unsatisfied condition: defined __GLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'features.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'features.h' file not found
 #include <features.h>
          ^
 1 error generated.
 check_host_cpp_condition newlib.h defined _NEWLIB_VERSION
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <newlib.h>
     2	#if !(defined _NEWLIB_VERSION)
     3	#error "unsatisfied condition: defined _NEWLIB_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'newlib.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'newlib.h' file not found
 #include <newlib.h>
          ^
 1 error generated.
 check_host_cpp_condition _mingw.h defined __MINGW64_VERSION_MAJOR
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW64_VERSION_MAJOR)
     3	#error "unsatisfied condition: defined __MINGW64_VERSION_MAJOR"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_host_cpp_condition _mingw.h defined __MINGW_VERSION
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW_VERSION)
     3	#error "unsatisfied condition: defined __MINGW_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_host_cpp_condition _mingw.h defined __MINGW32_VERSION
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <_mingw.h>
     2	#if !(defined __MINGW32_VERSION)
     3	#error "unsatisfied condition: defined __MINGW32_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: '_mingw.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: '_mingw.h' file not found
 #include <_mingw.h>
          ^
 1 error generated.
 check_host_cpp_condition crtversion.h defined _VC_CRT_MAJOR_VERSION
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <crtversion.h>
     2	#if !(defined _VC_CRT_MAJOR_VERSION)
     3	#error "unsatisfied condition: defined _VC_CRT_MAJOR_VERSION"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'crtversion.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'crtversion.h' file not found
 #include <crtversion.h>
          ^
 1 error generated.
 check_host_cpp_condition stddef.h defined __KLIBC__
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <stddef.h>
     2	#if !(defined __KLIBC__)
     3	#error "unsatisfied condition: defined __KLIBC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:3:2: error: "unsatisfied condition: defined __KLIBC__"
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:3:2: error: "unsatisfied condition: defined __KLIBC__"
 #error "unsatisfied condition: defined __KLIBC__"
  ^
 1 error generated.
 check_host_cpp_condition sys/cdefs.h defined __BIONIC__
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <sys/cdefs.h>
     2	#if !(defined __BIONIC__)
     3	#error "unsatisfied condition: defined __BIONIC__"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:3:2: error: "unsatisfied condition: defined __BIONIC__"
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:3:2: error: "unsatisfied condition: defined __BIONIC__"
 #error "unsatisfied condition: defined __BIONIC__"
  ^
 1 error generated.
 check_host_cpp_condition sys/brand.h defined LABELED_BRAND_NAME
 check_host_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <sys/brand.h>
     2	#if !(defined LABELED_BRAND_NAME)
     3	#error "unsatisfied condition: defined LABELED_BRAND_NAME"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:10: fatal error: 'sys/brand.h' file not found
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -std=c99 -Wall -O3 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+/var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:10: fatal error: 'sys/brand.h' file not found
 #include <sys/brand.h>
          ^
 1 error generated.
 check_host_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <time.h>
     2	void *v = localtime_r;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -std=c99 -Wall -O3 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -std=c99 -Wall -O3 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_compile_assert flt_lim float.h limits.h DBL_MAX == (double)DBL_MAX
 check_code cc float.h limits.h char c[2 * !!(DBL_MAX == (double)DBL_MAX) - 1]
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <float.h>
     2	#include <limits.h>
     3	int main(void) { char c[2 * !!(DBL_MAX == (double)DBL_MAX) - 1]; return 0; }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cpp_condition stdlib.h defined(__PIC__) || defined(__pic__) || defined(PIC)
 check_cpp
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <stdlib.h>
     2	#if !(defined(__PIC__) || defined(__pic__) || defined(PIC))
     3	#error "unsatisfied condition: defined(__PIC__) || defined(__pic__) || defined(PIC)"
     4	#endif
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -E -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cflags -fomit-frame-pointer
 test_cflags -fomit-frame-pointer
 check_cc -fomit-frame-pointer
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -fomit-frame-pointer -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -std=c99 -fomit-frame-pointer -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	int ff_extern;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void) { __asm__ volatile ("" ::); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(char * restrict p);
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void) { _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"") }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	struct { int x; } __attribute__((packed)) x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	union { int x; } __attribute__((may_alias)) x;
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	unsigned int endian = 'B' << 24 | 'I' << 16 | 'G' << 8 | 'E';
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm inline_asm_labels "1:
 "
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("1:\n"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm inline_asm_nonlocal_labels "Label:
 "
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("Label:\n"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_builtin rdtsc intrin.h __rdtsc()
 check_code ld intrin.h __rdtsc() cc
 check_ld cc
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <intrin.h>
     2	int main(void) { __rdtsc(); return 0; }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-In file included from /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c:1:
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+In file included from /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c:1:
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/intrin.h:26:15: fatal error: 'Intrin.h' file not found
 #include_next <Intrin.h>
               ^
@@ -8510,15 +8490,15 @@ check_builtin mm_empty mmintrin.h _mm_empty()
 check_code ld mmintrin.h _mm_empty() cc
 check_ld cc
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <mmintrin.h>
     2	int main(void) { _mm_empty(); return 0; }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -Wl,-dynamic,-search_paths_first -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cWSnRWF3 /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -Wl,-dynamic,-search_paths_first -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.6ZnFPR2c /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o
 check_ld cc
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	#include <signal.h>
     2	static void sighandler(int sig){
     3	    raise(SIGTERM);
@@ -8538,61 +8518,61 @@ BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
    17	#endif
    18	    return func_ptr();
    19	}
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -Wl,-dynamic,-search_paths_first -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cWSnRWF3 /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -Wl,-dynamic,-search_paths_first -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.6ZnFPR2c /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o
 check_inline_asm ebx_available ""::"b"(0)
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile(""::"b"(0)); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm ebx_available "":::"%ebx"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("":::"%ebx"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm xmm_clobbers "":::"%xmm0"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("":::"%xmm0"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm inline_asm_direct_symbol_refs "movl _test, %eax"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("movl _test, %eax"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 fatal error: error in backend: 32-bit absolute addressing is not supported in 64-bit mode
 check_inline_asm inline_asm_direct_symbol_refs "movl _test(%rip), %eax"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("movl _test(%rip), %eax"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm ssse3_inline "pabsw %xmm0, %xmm0"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("pabsw %xmm0, %xmm0"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 check_inline_asm mmxext_inline "pmaxub %mm0, %mm1"
 check_cc
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
     1	void foo(void){ __asm__ volatile("pmaxub %mm0, %mm1"); }
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.xYBL3oUE.c
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DPIC -std=c99 -fomit-frame-pointer -fPIC -c -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.qLbVHamN.c
 yasm --version
 ./configure: line 830: yasm: command not found
 nasm -v
 NASM version 0.98.40 (Apple Computer, Inc. build 11) compiled on Nov 11 2015
 check_yasm movbe ecx, [5]
-BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.QwdrOTgr.S
+BEGIN /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cVOngsbE.S
     1	movbe ecx, [5]
-END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.QwdrOTgr.S
-nasm -f macho64 -DPIC -DPREFIX -Werror -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.0RU1oY7V.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.QwdrOTgr.S
+END /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cVOngsbE.S
+nasm -f macho64 -DPIC -DPREFIX -Werror -o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.OIOFBgcz.o /var/folders/nq/l3hbty313v1cctv_qz42pr0r0000gn/T//ffconf.cVOngsbE.S
 nasm: fatal: unrecognised output format `macho64' - use -hf for a list
 type `nasm -h' for help
 yasm/nasm not found or too old. Use --disable-yasm for a crippled build.
