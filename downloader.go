@@ -38,7 +38,8 @@ var urlStrings arrayFlags
 var videoFolder = "video_downloads"
 var mp3Folder = "mp3_files"
 var youtubeFolder = "youtube-dl-master"
-var ffmpeg = "ffmpeg-2.8.4"
+
+//var ffmpeg = "ffmpeg-2.8.4"
 
 func main() {
 	// get the absolute path of the script in order to create a video directory if it doesn't exist
@@ -73,17 +74,15 @@ func main() {
 	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
 	flag.Parse()
 
-	// section of code dealing with the downloading of videos off of youtube
-	// create a list of file names of vidoes
-	//var videofiles []string
-	//var videofiles VideoFilePaths
 	if *fileMode == false {
 		for _, url := range urlStrings {
 			// change the directory to the directory of the videodown
 			os.Chdir(youtubeDirectoryPath)
 			if runtime.GOOS == "windows" {
+				//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
 				//TODO
 			} else {
+				//MAC ENVIRONMENT BINARIES
 				// download the video file using the python youtube downloader
 				cmd := exec.Command("/bin/sh", "-c", "python -m youtube_dl "+url)
 				cmd.Run()
@@ -94,45 +93,33 @@ func main() {
 
 				// move the file the the vidoes directory
 				err := os.Rename(oldVideoPath, newVideoPath)
-				//videofiles.add(filepath.Join(videoDirectoryPath, videos[0]))
 				if err != nil {
 					fmt.Println(err)
 				}
 
-				// change the working directory to were ffmpeg lives
-				os.Chdir(filepath.Join(path, ffmpeg))
-				//remove the path from the movie name and change it's path
+				// string magic to ensure the paths are correct, formats, and paths
+				// this could probably be cleaned up a bit
 				newVideoFileName := strings.Replace(oldVideoPath, videoDirectoryPath, "", -1)
 				newVideoFileName = strings.Replace(newVideoFileName, ".mp4", ".mp3", -1)
 				oldVideoPath = newVideoPath
 				newVideoPath = filepath.Join(path, mp3Folder)
 				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
-				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "video_downloads", -1)
+				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "mp3_files", -1)
 
-				// fix the new path it's returning
-				///Users/marcsantiago/Desktop/videotomp3_golang/video_downloads/Muse - Madness-Ek0SgwWmF9w.mp3
-
-				fmt.Println(newVideoPath)
+				fmt.Println(oldVideoPath)
+				//Ensure path is located where the binaries live
+				os.Chdir(path)
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
 				err = cmd.Run()
-				fmt.Println(err)
+				if err != nil {
+					fmt.Println(err)
+				}
 			}
 		}
 	} else {
+		//Load URLS from text file
 		//TODO
 	}
-	//test
-	// videofiles.add("/Users/marcsantiago/Desktop/videotomp3_golang/video_downloads/Day\\ 24\\ -\\ Kendall\\ Jenner\\ by\\ James\\ Lima\\ \\ \\(LOVE\\ Advent\\ 2015\\)-AmeSgBd-KVE.mp4 ")
-	//   exit status 127
-	//   //ffmpeg -i filename.mp4 filename.mp3
-	//   for _, videoFile := range videofiles.files {
-	//     vfile := mp3Folder + strings.  Replace(videoFile, path, "", -1)
-	//     fmt.Println(vfile)
-	//     cmd := exec.Command("./ffmpeg -i", videoFile+" "+vfile)
-	//     err := cmd.Run()
-	//     fmt.Println(err)
-	//   }
-
 }
 
 func folderExists(path string) (bool, error) {
