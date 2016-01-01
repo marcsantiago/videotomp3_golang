@@ -15,7 +15,7 @@ curl -#LO http://webm.googlecode.com/files/libvpx-v0.9.7-p1.tar.bz2
 curl -#LO ftp://ftp.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
 curl -#LO http://downloads.xvid.org/downloads/xvidcore-1.3.2.tar.gz
 # curl -#LG -d "p=ffmpeg.git;a=snapshot;h=HEAD;sf=tgz" -o ffmpeg.tar.gz http://git.videolan.org/
-curl -#LO http://ffmpeg.org/releases/ffmpeg-0.8.5.tar.bz2
+curl -#LO http://ffmpeg.org/releases/ffmpeg-2.8.4.tar.bz2
 
 # Unpack files
 for file in `ls ${SOURCES}/*.tar.*`; do

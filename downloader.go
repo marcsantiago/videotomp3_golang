@@ -110,7 +110,7 @@ func main() {
 				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "video_downloads", -1)
 
 				// fix the new path it's returning
-				//Users/marcsantiago/desktop/videotomp3_golang/youtube-dl-master/Day 24 - Kendall Jenner by James Lima  (LOVE Advent 2015)-AmeSgBd-KVE.mp3
+				///Users/marcsantiago/Desktop/videotomp3_golang/video_downloads/Muse - Madness-Ek0SgwWmF9w.mp3
 
 				fmt.Println(newVideoPath)
 				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
