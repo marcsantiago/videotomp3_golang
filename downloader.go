@@ -100,10 +100,13 @@ func main() {
 				// this could probably be cleaned up a bit
 				newVideoFileName := strings.Replace(oldVideoPath, videoDirectoryPath, "", -1)
 				newVideoFileName = strings.Replace(newVideoFileName, ".mp4", ".mp3", -1)
+				//newVideoFileName = strings.Replace(newVideoFileName, newVideoFileName, "\""+newVideoFileName+"\"", -1)
 				oldVideoPath = newVideoPath
+				oldVideoPath = strings.Replace(oldVideoPath, oldVideoPath, "\""+oldVideoPath+"\"", -1)
 				newVideoPath = filepath.Join(path, mp3Folder)
 				newVideoPath = filepath.Join(newVideoPath, newVideoFileName)
 				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "mp3_files", -1)
+				newVideoPath = strings.Replace(newVideoPath, newVideoPath, "\""+newVideoPath+"\"", -1)
 
 				//make sure the file in the directory before executing the command
 				fmt.Printf("confirming path for %s\n", url)
@@ -138,12 +141,17 @@ func main() {
 				os.Chdir(path)
 				fmt.Printf("Converting video to mp3\n")
 				ffmpegCommand := fmt.Sprintf("./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
+				fmt.Println(oldVideoPath)
+				fmt.Println(newVideoPath)
 				out, err := exec.Command("/bin/sh", "-c", ffmpegCommand).CombinedOutput()
 				if err != nil {
 					fmt.Printf("Error: %v %v\n", err, string(out))
 				} else {
 					fmt.Printf("Removing video\n")
-					err = os.Remove(oldVideoPath)
+					err = os.Remove(strings.Replace(oldVideoPath, "\"", "", -1))
+					if err != nil {
+						fmt.Printf("Error: %v\n", err)
+					}
 				}
 
 				// ffmpegCommand := fmt.Sprintf("./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
