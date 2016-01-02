@@ -147,7 +147,7 @@ class UdemyIE(InfoExtractor):
             # Error could possibly mean we are not enrolled in the course
             if isinstance(e.cause, compat_HTTPError) and e.cause.code == 403:
                 self._enroll_course(webpage, course_id)
-                lecture_id = self._download_lecture(course_id, lecture_id)
+                lecture = self._download_lecture(course_id, lecture_id)
             else:
                 raise
 
@@ -244,10 +244,25 @@ class UdemyCourseIE(UdemyIE):
             'https://www.udemy.com/api-1.1/courses/%s/curriculum' % course_id,
             course_id, 'Downloading course curriculum')
 
-        entries = [
-            self.url_result(
-                'https://www.udemy.com/%s/#/lecture/%s' % (course_path, asset['id']), 'Udemy')
-            for asset in response if asset.get('assetType') or asset.get('asset_type') == 'Video'
-        ]
+        entries = []
+        chapter, chapter_number = None, None
+        for asset in response:
+            asset_type = asset.get('assetType') or asset.get('asset_type')
+            if asset_type == 'Video':
+                asset_id = asset.get('id')
+                if asset_id:
+                    entry = {
+                        '_type': 'url_transparent',
+                        'url': 'https://www.udemy.com/%s/#/lecture/%s' % (course_path, asset['id']),
+                        'ie_key': UdemyIE.ie_key(),
+                    }
+                    if chapter_number:
+                        entry['chapter_number'] = chapter_number
+                    if chapter:
+                        entry['chapter'] = chapter
+                    entries.append(entry)
+            elif asset.get('type') == 'chapter':
+                chapter_number = asset.get('index') or asset.get('object_index')
+                chapter = asset.get('title')
 
         return self.playlist_result(entries, course_id, course_title)

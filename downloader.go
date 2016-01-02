@@ -57,13 +57,14 @@ func main() {
 				if checkUrl(url) {
 					//wg.Add(1)
 					//go macDownloader(url)
-					macDownloader(url)
+					//macDownloader(url)
+					downloadVideo(url, true)
 				} else {
 					fmt.Printf("The url %s is not a proper youtube url\n", url)
 				}
 			}
 		}
-		wg.Wait()
+		//wg.Wait()
 		fmt.Printf("Done converting videos\n")
 	} else {
 		//Load URLS from text file
@@ -217,4 +218,56 @@ func macDownloader(url string) {
 		}
 	}
 	//wg.Done()
+}
+
+func downloadVideo(url string, mac bool) {
+	if mac == true {
+		path, err := filepath.Abs("")
+		if err != nil {
+			fmt.Println("Error locating absulte file paths")
+			os.Exit(1)
+		}
+
+		videoDirectoryPath := filepath.Join(path, videoFolder)
+		exist, err := folderExists(videoDirectoryPath)
+		if err != nil {
+			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", videoDirectoryPath)
+			os.Exit(1)
+		}
+		if !exist {
+			os.Mkdir(videoDirectoryPath, 0777)
+		}
+
+		mp3DirectoryPath := filepath.Join(path, mp3Folder)
+		exist, err = folderExists(mp3DirectoryPath)
+		if err != nil {
+			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
+			os.Exit(1)
+		}
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
+		}
+
+		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
+
+		// change the directory to the directory of the videodown
+		os.Chdir(youtubeDirectoryPath)
+		fmt.Printf("Downloading video %s\n", url)
+
+		cmd := exec.Command("/bin/sh", "-c", "python -m  youtube-dl --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
+		cmd.Run()
+		fmt.Printf("Downloading video %s complete\n", url)
+		videos := checkExt(".mp4")
+		oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
+		newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
+
+		// move the file the the vidoes directory
+		err = os.Rename(oldVideoPath, newVideoPath)
+		if err != nil {
+			fmt.Println(err)
+		}
+	} else {
+		//WINDOWS
+		//TODO
+	}
 }
