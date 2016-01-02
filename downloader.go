@@ -85,7 +85,7 @@ func main() {
 				fmt.Printf("Downloading video %s\n", url)
 				cmd := exec.Command("/bin/sh", "-c", "python -m youtube_dl "+url)
 				cmd.Run()
-				fmt.Printf("Downloading video complete%s\n", url)
+				fmt.Printf("Downloading video %s complete\n", url)
 				videos := checkExt(".mp4")
 				oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
 				newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
@@ -106,14 +106,16 @@ func main() {
 				newVideoPath = strings.Replace(newVideoFileName, "youtube-dl-master", "mp3_files", -1)
 
 				//make sure the file in the directory before executing the command
-				fmt.Printf("confirming paths %s\n", url)
+				fmt.Printf("confirming path for %s\n", url)
 				os.Chdir(videoDirectoryPath)
 				stop := 0
+				exit := false
 				for {
 					videos = checkExt(".mp4")
 					if len(videos) > 0 {
 						for _, vidName := range videos {
-							if strings.Contains(strings.Replace(newVideoFileName, ".mp3", ".mp4", -1), vidName) {
+							if strings.Contains(strings.Replace(newVideoFileName, ".mp3", ".mp4", -1), vidName) == true {
+								exit = true
 								break
 							} else {
 								fmt.Printf("Video not found\n")
@@ -126,7 +128,7 @@ func main() {
 						time.Sleep(1000 * time.Millisecond)
 						stop++
 					}
-					if stop > 15 {
+					if stop > 15 || exit {
 						break
 					}
 				}
@@ -135,14 +137,28 @@ func main() {
 				//Ensure path is located where the binaries live
 				os.Chdir(path)
 				fmt.Printf("Converting video to mp3\n")
-				cmd = exec.Command("/bin/sh", "-c", "./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
-				err = cmd.Run()
+				ffmpegCommand := fmt.Sprintf("./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
+				out, err := exec.Command("/bin/sh", "-c", ffmpegCommand).CombinedOutput()
 				if err != nil {
-					fmt.Printf("Error Running ffmpeg: %v\n", err)
+					fmt.Printf("Error: %v %v\n", err, string(out))
 				} else {
 					fmt.Printf("Removing video\n")
 					err = os.Remove(oldVideoPath)
 				}
+
+				// ffmpegCommand := fmt.Sprintf("./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
+				//         fmt.Printf("trying command %s\n", ffmpegCommand)
+				//         cmd = exec.Command("/bin/sh", "-c", ffmpegCommand).CombinedOutput()
+				//         err = cmd.Run()
+				//         if err != nil {
+				//           log.Fatalf("date failed: %v %v", err, string(out))
+				//         }
+				//         if err != nil {
+				//           fmt.Printf("Error Running ffmpeg: %v\n", err)
+				//         } else {
+				//           fmt.Printf("Removing video\n")
+				//           err = os.Remove(oldVideoPath)
+				//         }
 			}
 		}
 	} else {
