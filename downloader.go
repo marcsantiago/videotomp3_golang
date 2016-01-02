@@ -153,26 +153,13 @@ func main() {
 						fmt.Printf("Error: %v\n", err)
 					}
 				}
-
-				// ffmpegCommand := fmt.Sprintf("./ffmpeg -i %s %s", oldVideoPath, newVideoPath)
-				//         fmt.Printf("trying command %s\n", ffmpegCommand)
-				//         cmd = exec.Command("/bin/sh", "-c", ffmpegCommand).CombinedOutput()
-				//         err = cmd.Run()
-				//         if err != nil {
-				//           log.Fatalf("date failed: %v %v", err, string(out))
-				//         }
-				//         if err != nil {
-				//           fmt.Printf("Error Running ffmpeg: %v\n", err)
-				//         } else {
-				//           fmt.Printf("Removing video\n")
-				//           err = os.Remove(oldVideoPath)
-				//         }
 			}
 		}
 	} else {
 		//Load URLS from text file
 		//TODO
 	}
+	fmt.Printf("Done converting %s", url)
 }
 
 func folderExists(path string) (bool, error) {
