@@ -203,15 +203,21 @@ func downloadMP3(url string, mac bool) {
 			os.Exit(1)
 		}
 		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
-		mp3DirectoryPath := filepath.Join(path, mp3Folder)
-		//create mp3 dicrectory
-		exist, err := folderExists(mp3DirectoryPath)
-		if err != nil {
-			fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
-			os.Exit(1)
-		}
+		var mp3DirectoryPath string
+		exist, _ := folderExists("config.txt")
 		if !exist {
-			os.Mkdir(mp3DirectoryPath, 0777)
+			mp3DirectoryPath = filepath.Join(path, mp3Folder)
+			//create mp3 dicrectory
+			exist, err := folderExists(mp3DirectoryPath)
+			if err != nil {
+				fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
+				os.Exit(1)
+			}
+			if !exist {
+				os.Mkdir(mp3DirectoryPath, 0777)
+			}
+		} else {
+			mp3DirectoryPath = mp3Folder
 		}
 
 		// change the directory to the directory of the youtube-dl
