@@ -240,7 +240,7 @@ func downloadMP3(url string, mac bool) {
 		cmd.Run()
 
 	} else {
-
+		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
 		cmd := exec.Command("cmd", "/C", "youtube-dl.exe --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
 		cmd.Stdout = os.Stdout
