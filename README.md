@@ -1,4 +1,4 @@
-<p><b>Installation:</b></p>
+<p><b>Reason for creation:</b></p>
 <p>
   I was tired of downloading mp3s from youtube on sites that allow you to input one link at a time.  
   By using youtube-dl and ffmpeg I was able to get around that.  
@@ -10,7 +10,7 @@
   The program is design to work on both macs and windows 64 bit.  
   The get started download the project and extract it's contents.  
   From your command line, type <code>go run setup.go</code>.  
-  If you are a <b>mac user<b/> the program will attempt to install homebrew, followed by the installtion of ffmpeg.  
+  If you are a <b>mac user</b> the program will attempt to install homebrew, followed by the installtion of ffmpeg.  
   If the program files try to manually installed using these three commands
   <ol>
     <li><code>ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></li>
