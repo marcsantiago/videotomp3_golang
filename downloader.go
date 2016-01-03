@@ -240,8 +240,12 @@ func downloadMP3(url string, mac bool) {
 		cmd.Run()
 
 	} else {
-		//WINDOWS
-		//TODO
+
+		os.Chdir(path)
+		cmd := exec.Command("cmd", "/C", "youtube-dl.exe --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
 	}
 	wg.Done()
 }
