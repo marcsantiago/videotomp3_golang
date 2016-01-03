@@ -15,16 +15,54 @@ import (
 
 var urlStrings arrayFlags
 var youtubeFolder = "youtube-dl-master"
+var oldVideoPath string
+var newVideoPath string
 
-//var mp3Folder = "mp3_files"
-var mp3Folder string
+var mp3DirectoryPath string
+var youtubeDirectoryPath string
+
+var path, _ = filepath.Abs("")
 
 var wg sync.WaitGroup
 
 func main() {
 
+	exist, _ := folderExists("config.txt")
+	if exist {
+		f, err := os.Open("config.txt")
+		checkFile(err)
+		defer f.Close()
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			line := scanner.Text()
+			if line == "" || line == "\n" {
+				continue
+			} else {
+				mp3DirectoryPath = strings.TrimSpace(line)
+			}
+		}
+	}
+
+	if mp3DirectoryPath == "" || mp3DirectoryPath == "\n" && exist {
+		fmt.Println("Error with the configure file, check the path and or delete the file and try again")
+		fmt.Println("Music is being downloaded to the parent path of the downloader.go file inside the mp3_files directory")
+		mp3DirectoryPath = filepath.Join(path, "mp3_files")
+		exist, _ := folderExists(mp3DirectoryPath)
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
+		}
+	} else {
+		exist, _ := folderExists(mp3DirectoryPath)
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
+		}
+	}
+
+	youtubeDirectoryPath = filepath.Join(path, youtubeFolder)
+
 	runtime.GOMAXPROCS(MaxParallelism())
 
+	// SET COMMAND LINE PARSER
 	var fileMode = flag.String("f", "false", "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	var Setconfig = flag.Bool("c", false, "Allows the user to create a config.txt file which tells the program where to create mp3 directory")
 
@@ -54,37 +92,16 @@ func main() {
 		}
 	}
 
-	exist, _ := folderExists("config.txt")
-	if exist {
-		f, err := os.Open("config.txt")
-		checkFile(err)
-		defer f.Close()
-		scanner := bufio.NewScanner(f)
-		for scanner.Scan() {
-			line := scanner.Text()
-			if line == "" || line == "\n" {
-				continue
-			} else {
-				mp3Folder = strings.TrimSpace(line)
-			}
-
-		}
-	} else {
-		mp3Folder = "mp3_files"
-	}
-
-	if mp3Folder == "" || mp3Folder == "\n" && exist {
-		fmt.Println("Error with the configure file, check the path and or delete the file and try again")
-		fmt.Println("Music is being downloaded to the parent path of the downloader.go file inside the mp3_files directory")
-		mp3Folder = "mp3_files"
-	}
-
 	if *fileMode == "false" {
 		if len(urlStrings) > 0 {
 			for _, url := range urlStrings {
 				if runtime.GOOS == "windows" {
-					//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
-					//TODO
+					if checkUrl(url) {
+						wg.Add(1)
+						go downloadMP3(url, false)
+					} else {
+						fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
+					}
 				} else {
 					if checkUrl(url) {
 						wg.Add(1)
@@ -95,30 +112,46 @@ func main() {
 				}
 			}
 			wg.Wait()
+			fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 			fmt.Printf("Done converting videos\n")
 		}
 	} else {
-		if runtime.GOOS == "windows" {
-			//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
-			//TODO
-		} else {
-			f, err := os.Open(*fileMode)
-			checkFile(err)
-			defer f.Close()
+		f, err := os.Open(*fileMode)
+		checkFile(err)
+		defer f.Close()
 
-			scanner := bufio.NewScanner(f)
-			var url string
-			for scanner.Scan() {
-				url = scanner.Text()
+		scanner := bufio.NewScanner(f)
+		var url string
+
+		for scanner.Scan() {
+			url = strings.TrimSpace(scanner.Text())
+			if runtime.GOOS == "windows" {
+				if checkUrl(url) {
+					wg.Add(1)
+					go downloadMP3(url, false)
+				} else {
+					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
+				}
+			} else {
 				if checkUrl(url) {
 					wg.Add(1)
 					go downloadMP3(url, true)
 				} else {
+					fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
 				}
 			}
-			wg.Wait()
 		}
+		wg.Wait()
+	}
+
+	// move all files after downloading
+	videos := checkExt(".mp3")
+	for _, vid := range videos {
+		oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
+		newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+		// move the file the the vidoes directory
+		os.Rename(oldVideoPath, newVideoPath)
 	}
 
 }
@@ -196,29 +229,6 @@ func MaxParallelism() int {
 
 func downloadMP3(url string, mac bool) {
 	if mac == true {
-		path, err := filepath.Abs("")
-		if err != nil {
-			fmt.Println("Error locating absulte file paths")
-			os.Exit(1)
-		}
-		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
-		var mp3DirectoryPath string
-		exist, _ := folderExists("config.txt")
-		if !exist {
-			mp3DirectoryPath = filepath.Join(path, mp3Folder)
-			//create mp3 dicrectory
-			exist, err := folderExists(mp3DirectoryPath)
-			if err != nil {
-				fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
-				os.Exit(1)
-			}
-			if !exist {
-				os.Mkdir(mp3DirectoryPath, 0777)
-			}
-		} else {
-			mp3DirectoryPath = mp3Folder
-		}
-
 		// change the directory to the directory of the youtube-dl
 		os.Chdir(youtubeDirectoryPath)
 
@@ -228,17 +238,6 @@ func downloadMP3(url string, mac bool) {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
-
-		videos := checkExt(".mp3")
-		var oldVideoPath string
-		var newVideoPath string
-		for _, vid := range videos {
-			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
-			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
-			// move the file the the vidoes directory
-			os.Rename(oldVideoPath, newVideoPath)
-		}
-		fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 
 	} else {
 		//WINDOWS
