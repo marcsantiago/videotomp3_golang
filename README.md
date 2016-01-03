@@ -11,7 +11,7 @@
   The get started download the project and extract it's contents.  
   From your command line, type <code>go run setup.go</code>.  
   If you are a <b>mac user</b> the program will attempt to install homebrew, followed by the installtion of ffmpeg.  
-  If the program files try to manually installed using these three commands
+  If the program fails try running these commands manually:
   <ol>
     <li><code>ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></li>
     <li><code>brew install ffmpeg --with-fdk-aac --with-ffplay --with-freetype --with-libass --with-libquvi --with-libvorbis --with-libvpx --with-opus --with-x265</code></li>
