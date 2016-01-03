@@ -238,7 +238,7 @@ func downloadMP3(url string, mac bool) {
 			// move the file the the vidoes directory
 			os.Rename(oldVideoPath, newVideoPath)
 		}
-		fmt.Printf("Check %s for your media", mp3DirectoryPath)
+		fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 
 	} else {
 		//WINDOWS
