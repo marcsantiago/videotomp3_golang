@@ -224,13 +224,11 @@ func downloadMP3(url string, mac bool) {
 
 		fmt.Printf("Downloading video %s\n", url)
 
-		out, err := exec.Command("/bin/sh", "-c", "python -m  youtube_dl --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url).CombinedOutput()
-		if err != nil {
-			fmt.Printf("Error: %v %v\n", err, string(out))
-		} else {
-			fmt.Printf("Downloading video %s complete\n", url)
-		}
-		// move the videos from the youtube-dl folder to the mp3_files folder
+		cmd := exec.Command("/bin/sh", "-c", "python -m  youtube_dl --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+
 		videos := checkExt(".mp3")
 		var oldVideoPath string
 		var newVideoPath string
@@ -239,8 +237,8 @@ func downloadMP3(url string, mac bool) {
 			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
 			// move the file the the vidoes directory
 			os.Rename(oldVideoPath, newVideoPath)
-
 		}
+		fmt.Printf("Check %s for your media", mp3DirectoryPath)
 
 	} else {
 		//WINDOWS
