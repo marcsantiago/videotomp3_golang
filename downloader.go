@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	//"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -11,12 +12,13 @@ import (
 	"runtime"
 	"strings"
 	"sync"
-	_ "time"
 )
 
 var urlStrings arrayFlags
-var mp3Folder = "mp3_files"
 var youtubeFolder = "youtube-dl-master"
+
+//var mp3Folder = "mp3_files"
+var mp3Folder string
 
 var wg sync.WaitGroup
 
@@ -25,34 +27,82 @@ func main() {
 	runtime.GOMAXPROCS(MaxParallelism())
 
 	var fileMode = flag.String("f", "false", "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
+	var Setconfig = flag.Bool("c", false, "Allows the user to create a config.txt file which tells the program where to create mp3 directory")
+
 	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
 	flag.Parse()
 
+	if *Setconfig == true {
+		// create a file for writing
+		f, err := os.Create("config.txt")
+		checkFile(err)
+		defer f.Close()
+
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Print("Enter Folder Path, e.g. /User/Desktop/mp3_files: ")
+		mp3DirectoryPath, _ := reader.ReadString('\n')
+		exist, err := folderExists(mp3DirectoryPath)
+		if err != nil {
+			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
+			os.Exit(1)
+		}
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
+			file, err := f.WriteString(mp3DirectoryPath + "\n")
+			checkFile(err)
+			fmt.Printf("wrote %d bytes\n", file)
+			f.Sync()
+		}
+	}
+	exist, err := folderExists("config.txt")
+	if err != nil {
+		//TODO
+	}
+
+	if exist {
+		f, err := os.Open("config.txt")
+		checkFile(err)
+		defer f.Close()
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			path := scanner.Text()
+			mp3Folder = strings.TrimSpace(path)
+			fmt.Println(mp3Folder)
+			fmt.Println(path)
+		}
+
+	} else {
+		mp3Folder = "mp3_files"
+	}
+
+	fmt.Println("Here")
+	fmt.Println(mp3Folder)
+
 	if *fileMode == "false" {
-		for _, url := range urlStrings {
-			if runtime.GOOS == "windows" {
-				//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
-				//TODO
-			} else {
-				if checkUrl(url) {
-					wg.Add(1)
-					go downloadMP3(url, true)
+		if len(urlStrings) > 0 {
+			for _, url := range urlStrings {
+				if runtime.GOOS == "windows" {
+					//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
+					//TODO
 				} else {
-					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
+					if checkUrl(url) {
+						wg.Add(1)
+						go downloadMP3(url, true)
+					} else {
+						fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
+					}
 				}
 			}
+			wg.Wait()
+			fmt.Printf("Done converting videos\n")
 		}
-		wg.Wait()
-		fmt.Printf("Done converting videos\n")
 	} else {
 		if runtime.GOOS == "windows" {
 			//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
 			//TODO
 		} else {
 			f, err := os.Open(*fileMode)
-			if err != nil {
-				fmt.Println(err)
-			}
+			checkFile(err)
 			defer f.Close()
 
 			scanner := bufio.NewScanner(f)
@@ -128,6 +178,12 @@ func checkUrl(url string) bool {
 	return false
 }
 
+func checkFile(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func MaxParallelism() int {
 	maxProcs := runtime.GOMAXPROCS(0)
 	numCPU := runtime.NumCPU()
@@ -149,7 +205,7 @@ func downloadMP3(url string, mac bool) {
 		//create mp3 dicrectory
 		exist, err := folderExists(mp3DirectoryPath)
 		if err != nil {
-			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
+			fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
 			os.Exit(1)
 		}
 		if !exist {
