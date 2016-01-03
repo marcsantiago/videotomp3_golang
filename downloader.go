@@ -252,20 +252,21 @@ func downloadVideo(url string, mac bool) {
 
 		// change the directory to the directory of the videodown
 		os.Chdir(youtubeDirectoryPath)
+
 		fmt.Printf("Downloading video %s\n", url)
 
 		cmd := exec.Command("/bin/sh", "-c", "python -m  youtube-dl --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
 		cmd.Run()
 		fmt.Printf("Downloading video %s complete\n", url)
-		videos := checkExt(".mp4")
-		oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
-		newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
-
-		// move the file the the vidoes directory
-		err = os.Rename(oldVideoPath, newVideoPath)
-		if err != nil {
-			fmt.Println(err)
-		}
+		// videos := checkExt(".mp4")
+		//     oldVideoPath := filepath.Join(youtubeDirectoryPath, videos[0])
+		//     newVideoPath := filepath.Join(videoDirectoryPath, videos[0])
+		//
+		//     // move the file the the vidoes directory
+		//     err = os.Rename(oldVideoPath, newVideoPath)
+		//     if err != nil {
+		//       fmt.Println(err)
+		//     }
 	} else {
 		//WINDOWS
 		//TODO
