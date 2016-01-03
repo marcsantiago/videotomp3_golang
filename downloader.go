@@ -14,7 +14,6 @@ import (
 )
 
 var urlStrings arrayFlags
-var videoFolder = "video_downloads"
 var mp3Folder = "mp3_files"
 var youtubeFolder = "youtube-dl-master"
 
