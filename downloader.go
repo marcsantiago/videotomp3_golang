@@ -123,18 +123,9 @@ func downloadMP3(url string, mac bool) {
 			fmt.Println("Error locating absulte file paths")
 			os.Exit(1)
 		}
-
-		videoDirectoryPath := filepath.Join(path, videoFolder)
-		exist, err := folderExists(videoDirectoryPath)
-		if err != nil {
-			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", videoDirectoryPath)
-			os.Exit(1)
-		}
-		if !exist {
-			os.Mkdir(videoDirectoryPath, 0777)
-		}
-
+		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
 		mp3DirectoryPath := filepath.Join(path, mp3Folder)
+		//create mp3 dicrectory
 		exist, err = folderExists(mp3DirectoryPath)
 		if err != nil {
 			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
@@ -144,9 +135,7 @@ func downloadMP3(url string, mac bool) {
 			os.Mkdir(mp3DirectoryPath, 0777)
 		}
 
-		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
-
-		// change the directory to the directory of the videodown
+		// change the directory to the directory of the youtube-dl
 		os.Chdir(youtubeDirectoryPath)
 
 		fmt.Printf("Downloading video %s\n", url)
@@ -157,7 +146,7 @@ func downloadMP3(url string, mac bool) {
 		} else {
 			fmt.Printf("Downloading video %s complete\n", url)
 		}
-
+		// move the videos from the youtube-dl folder to the mp3_files folder
 		videos := checkExt(".mp3")
 		var oldVideoPath string
 		var newVideoPath string
