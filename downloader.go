@@ -21,11 +21,19 @@ var newVideoPath string
 var mp3DirectoryPath string
 var youtubeDirectoryPath string
 
-var path, _ = filepath.Abs("")
+//var path, _ = filepath.Abs("")
+var path string
+
 
 var wg sync.WaitGroup
 
 func main() {
+
+	if runtime.GOOS == "windows"{
+		path, _ = os.Getwd()
+	} else {
+		path, _ = filepath.Abs("")
+	}
 
 	exist, _ := folderExists("config.txt")
 	if exist {
@@ -43,20 +51,7 @@ func main() {
 		}
 	}
 
-	if mp3DirectoryPath == "" || mp3DirectoryPath == "\n" && exist {
-		fmt.Println("Error with the configure file, check the path and or delete the file and try again")
-		fmt.Println("Music is being downloaded to the parent path of the downloader.go file inside the mp3_files directory")
-		mp3DirectoryPath = filepath.Join(path, "mp3_files")
-		exist, _ := folderExists(mp3DirectoryPath)
-		if !exist {
-			os.Mkdir(mp3DirectoryPath, 0777)
-		}
-	} else {
-		exist, _ := folderExists(mp3DirectoryPath)
-		if !exist {
-			os.Mkdir(mp3DirectoryPath, 0777)
-		}
-	}
+	
 
 	youtubeDirectoryPath = filepath.Join(path, youtubeFolder)
 
@@ -80,15 +75,29 @@ func main() {
 		mp3DirectoryPath, _ := reader.ReadString('\n')
 		exist, err := folderExists(mp3DirectoryPath)
 		if err != nil {
-			fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
-			os.Exit(1)
+			fmt.Printf("Error: %s \n", err)
 		}
 		if !exist {
+			fmt.Printf("The folder: %s either does not exist creating it now\n", mp3DirectoryPath)
 			os.Mkdir(mp3DirectoryPath, 0777)
 			file, err := f.WriteString(mp3DirectoryPath + "\n")
 			checkFile(err)
 			fmt.Printf("wrote %d bytes\n", file)
 			f.Sync()
+		}
+	}
+
+	if mp3DirectoryPath == "" || mp3DirectoryPath == "\n" && exist {
+		fmt.Println("Music is being downloaded to the parent path of the downloader.go file inside the mp3_files directory")
+		mp3DirectoryPath = filepath.Join(path, "mp3_files")
+		exist, _ := folderExists(mp3DirectoryPath)
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
+		}
+	} else {
+		exist, _ := folderExists(mp3DirectoryPath)
+		if !exist {
+			os.Mkdir(mp3DirectoryPath, 0777)
 		}
 	}
 
