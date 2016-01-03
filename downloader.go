@@ -155,10 +155,24 @@ func main() {
 	}
 
 	// move all files after downloading
+	if runtime.GOOS == "windows" {
+		os.Chdir(path)
+	} else {
+		os.Chdir(youtubeDirectoryPath)
+	}
+
 	videos := checkExt(".mp3")
+	fmt.Println("before for loop")
 	for _, vid := range videos {
-		oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
-		newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+		
+		if runtime.GOOS == "windows" {
+			oldVideoPath = filepath.Join(path, vid)
+			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+		} else{
+			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
+			newVideoPath = filepath.Join(mp3DirectoryPath, vid)	
+		}
+		
 		// move the file the the vidoes directory
 		os.Rename(oldVideoPath, newVideoPath)
 	}
@@ -205,7 +219,7 @@ func checkExt(ext string) []string {
 	filepath.Walk(pathS, func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {
 			r, err := regexp.MatchString(ext, f.Name())
-			if err == nil && r {
+			if err == nil && r && (strings.Contains(f.Name(), "pyc") == false || strings.Contains(f.Name(), "mp3.py") == false){
 				files = append(files, f.Name())
 			}
 		}
@@ -253,7 +267,6 @@ func downloadMP3(url string, mac bool) {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
 		tool := fmt.Sprintf("youtube-dl.exe --extract-audio --audio-format mp3 "+ url)
-		fmt.Println(tool)
 		cmd := exec.Command("cmd", "/C", tool)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
