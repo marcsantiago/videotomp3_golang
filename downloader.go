@@ -126,7 +126,7 @@ func downloadMP3(url string, mac bool) {
 		youtubeDirectoryPath := filepath.Join(path, youtubeFolder)
 		mp3DirectoryPath := filepath.Join(path, mp3Folder)
 		//create mp3 dicrectory
-		exist, err = folderExists(mp3DirectoryPath)
+		exist, err := folderExists(mp3DirectoryPath)
 		if err != nil {
 			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
 			os.Exit(1)
