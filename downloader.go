@@ -38,7 +38,7 @@ func main() {
 					wg.Add(1)
 					go downloadMP3(url, true)
 				} else {
-					fmt.Printf("The url %s is not a proper youtube url\n", url)
+					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
 				}
 			}
 		}
@@ -63,7 +63,7 @@ func main() {
 					wg.Add(1)
 					go downloadMP3(url, true)
 				} else {
-					fmt.Printf("The url %s is not a proper youtube url\n", url)
+					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
 				}
 			}
 			wg.Wait()
