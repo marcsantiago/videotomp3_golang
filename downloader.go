@@ -54,8 +54,8 @@ func main() {
 			f.Sync()
 		}
 	}
-	exist, _ := folderExists("config.txt")
 
+	exist, _ := folderExists("config.txt")
 	if exist {
 		f, err := os.Open("config.txt")
 		checkFile(err)
