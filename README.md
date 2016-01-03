@@ -19,7 +19,6 @@
   </ol>
   If you are a <b>windows user</b> The program will attempt to create a folder in your c drive and copy the contents of the windows_ffmpeg folder to that new directory.  Afterwards it will create a path environment to the it's bin folder.
 </p>
-<br/>
 <p><b>Notes:</b></p>
 <p>
   If you wish can can build the downloader using <code>go run downloader.go</code>, which will create a binary of the script
@@ -33,7 +32,6 @@
 <p>
   I suggest you create a shortcut or alias to the binary or go file.
 </p>
-<br />
 <p><b>Setup Directory:</b></p>
 <p>
   As a default mp3s are downloaded to the mp3_files directory located in the same directory as the downloader script.  
