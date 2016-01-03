@@ -24,12 +24,11 @@ var youtubeDirectoryPath string
 //var path, _ = filepath.Abs("")
 var path string
 
-
 var wg sync.WaitGroup
 
 func main() {
 
-	if runtime.GOOS == "windows"{
+	if runtime.GOOS == "windows" {
 		path, _ = os.Getwd()
 	} else {
 		path, _ = filepath.Abs("")
@@ -51,8 +50,6 @@ func main() {
 		}
 	}
 
-	
-
 	youtubeDirectoryPath = filepath.Join(path, youtubeFolder)
 
 	runtime.GOMAXPROCS(MaxParallelism())
@@ -73,17 +70,29 @@ func main() {
 		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Enter Folder Path, e.g. /User/Desktop/mp3_files: ")
 		mp3DirectoryPath, _ := reader.ReadString('\n')
-		exist, err := folderExists(mp3DirectoryPath)
-		if err != nil {
-			fmt.Printf("Error: %s \n", err)
-		}
-		if !exist {
-			fmt.Printf("The folder: %s either does not exist creating it now\n", mp3DirectoryPath)
+		//MKDIR c:\FFMPEG
+
+		if runtime.GOOS == "windows" {
 			os.Mkdir(mp3DirectoryPath, 0777)
 			file, err := f.WriteString(mp3DirectoryPath + "\n")
 			checkFile(err)
 			fmt.Printf("wrote %d bytes\n", file)
 			f.Sync()
+
+		} else {
+			exist, err := folderExists(mp3DirectoryPath)
+			if err != nil {
+				fmt.Printf("Error: %s \n", err)
+				os.Exit(1)
+			}
+			if !exist {
+				fmt.Printf("The folder: %s either does not exist creating it now\n", mp3DirectoryPath)
+				os.Mkdir(mp3DirectoryPath, 0777)
+				file, err := f.WriteString(mp3DirectoryPath + "\n")
+				checkFile(err)
+				fmt.Printf("wrote %d bytes\n", file)
+				f.Sync()
+			}
 		}
 	}
 
@@ -162,17 +171,14 @@ func main() {
 	}
 
 	videos := checkExt(".mp3")
-	fmt.Println("before for loop")
 	for _, vid := range videos {
-		
 		if runtime.GOOS == "windows" {
 			oldVideoPath = filepath.Join(path, vid)
 			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
-		} else{
+		} else {
 			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
-			newVideoPath = filepath.Join(mp3DirectoryPath, vid)	
+			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
 		}
-		
 		// move the file the the vidoes directory
 		os.Rename(oldVideoPath, newVideoPath)
 	}
@@ -219,7 +225,7 @@ func checkExt(ext string) []string {
 	filepath.Walk(pathS, func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {
 			r, err := regexp.MatchString(ext, f.Name())
-			if err == nil && r && (strings.Contains(f.Name(), "pyc") == false || strings.Contains(f.Name(), "mp3.py") == false){
+			if err == nil && r && (strings.Contains(f.Name(), "pyc") == false || strings.Contains(f.Name(), "mp3.py") == false) {
 				files = append(files, f.Name())
 			}
 		}
@@ -251,7 +257,6 @@ func MaxParallelism() int {
 }
 
 func downloadMP3(url string, mac bool) {
-	
 
 	if mac == true {
 		// change the directory to the directory of the youtube-dl
@@ -266,7 +271,7 @@ func downloadMP3(url string, mac bool) {
 	} else {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
-		tool := fmt.Sprintf("youtube-dl.exe --extract-audio --audio-format mp3 "+ url)
+		tool := fmt.Sprintf("youtube-dl.exe --extract-audio --audio-format mp3 " + url)
 		cmd := exec.Command("cmd", "/C", tool)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
