@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"os"
@@ -23,11 +24,11 @@ func main() {
 
 	runtime.GOMAXPROCS(MaxParallelism())
 
-	var fileMode = flag.Bool("f", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
+	var fileMode = flag.String("f", "false", "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
 	flag.Parse()
 
-	if *fileMode == false {
+	if *fileMode == "false" {
 		for _, url := range urlStrings {
 			if runtime.GOOS == "windows" {
 				//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
@@ -44,8 +45,29 @@ func main() {
 		wg.Wait()
 		fmt.Printf("Done converting videos\n")
 	} else {
-		//Load URLS from text file
-		//TODO
+		if runtime.GOOS == "windows" {
+			//WINDOWS ENVIRONMENT CHECK, TO MAKE SURE THE BINARIES THAT WE ARE USING ARE THE CORRECT ONES
+			//TODO
+		} else {
+			f, err := os.Open(*fileMode)
+			if err != nil {
+				fmt.Println(err)
+			}
+			defer f.Close()
+
+			scanner := bufio.NewScanner(f)
+			var url string
+			for scanner.Scan() {
+				url = scanner.Text()
+				if checkUrl(url) {
+					wg.Add(1)
+					go downloadMP3(url, true)
+				} else {
+					fmt.Printf("The url %s is not a proper youtube url\n", url)
+				}
+			}
+			wg.Wait()
+		}
 	}
 
 }
