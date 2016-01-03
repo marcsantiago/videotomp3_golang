@@ -43,7 +43,7 @@ func main() {
 		mp3DirectoryPath, _ := reader.ReadString('\n')
 		exist, err := folderExists(mp3DirectoryPath)
 		if err != nil {
-			fmt.Println("The folder: %s either does not exist or is not in the same directory as make.go", mp3DirectoryPath)
+			fmt.Println("The folder: %s either does not exist or is not in the same directory as downloader.go", mp3DirectoryPath)
 			os.Exit(1)
 		}
 		if !exist {
@@ -54,10 +54,7 @@ func main() {
 			f.Sync()
 		}
 	}
-	exist, err := folderExists("config.txt")
-	if err != nil {
-		//TODO
-	}
+	exist, _ := folderExists("config.txt")
 
 	if exist {
 		f, err := os.Open("config.txt")
@@ -65,18 +62,23 @@ func main() {
 		defer f.Close()
 		scanner := bufio.NewScanner(f)
 		for scanner.Scan() {
-			path := scanner.Text()
-			mp3Folder = strings.TrimSpace(path)
-			fmt.Println(mp3Folder)
-			fmt.Println(path)
-		}
+			line := scanner.Text()
+			if line == "" || line == "\n" {
+				continue
+			} else {
+				mp3Folder = strings.TrimSpace(line)
+			}
 
+		}
 	} else {
 		mp3Folder = "mp3_files"
 	}
 
-	fmt.Println("Here")
-	fmt.Println(mp3Folder)
+	if mp3Folder == "" || mp3Folder == "\n" && exist {
+		fmt.Println("Error with the configure file, check the path and or delete the file and try again")
+		fmt.Println("Music is being downloaded to the parent path of the downloader.go file inside the mp3_files directory")
+		mp3Folder = "mp3_files"
+	}
 
 	if *fileMode == "false" {
 		if len(urlStrings) > 0 {
