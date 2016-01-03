@@ -237,10 +237,11 @@ func MaxParallelism() int {
 }
 
 func downloadMP3(url string, mac bool) {
+	
+
 	if mac == true {
 		// change the directory to the directory of the youtube-dl
 		os.Chdir(youtubeDirectoryPath)
-
 		fmt.Printf("Downloading video %s\n", url)
 
 		cmd := exec.Command("/bin/sh", "-c", "python -m  youtube_dl --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
@@ -251,7 +252,9 @@ func downloadMP3(url string, mac bool) {
 	} else {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
-		cmd := exec.Command("cmd", "/C", "youtube-dl.exe --extract-audio --audio-format mp3 -o \"%(title)s.%(ext)s \" "+url)
+		tool := fmt.Sprintf("youtube-dl.exe --extract-audio --audio-format mp3 "+ url)
+		fmt.Println(tool)
+		cmd := exec.Command("cmd", "/C", tool)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
