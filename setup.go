@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	
+
 	if runtime.GOOS == "windows" {
 		path, err := os.Getwd()
 		if err != nil {
@@ -20,12 +20,10 @@ func main() {
 		batScript := filepath.Join(path, "install_ffmpeg.bat")
 
 		fmt.Printf("Copying windows_ffmpeg contents to c:\\FFMPEG and adding the path env c:\\FFMPEG\\bin\n")
-		out, err := exec.Command("cmd", "/C", batScript).CombinedOutput()
-		if err != nil {
-			fmt.Printf("Error: %v %v\n", err, string(out))
-		} else {
-			fmt.Printf("Done installing ffmpeg")
-		}
+		cmd := exec.Command("cmd", "/C", batScript)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
 
 	} else {
 		path, err := filepath.Abs("")
@@ -36,11 +34,10 @@ func main() {
 		}
 		shellScript := filepath.Join(path, "install_ffmpeg.sh")
 		fmt.Printf("Please be patient installing homebrew, ffpmeg, and updating take a while")
-		out, err := exec.Command("/bin/sh", shellScript).CombinedOutput()
-		if err != nil {
-			fmt.Printf("Error: %v %v\n", err, string(out))
-		} else {
-			fmt.Printf("Homebrew and ffmpeg installed")
-		}
+		cmd := exec.Command("/bin/sh", shellScript)
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+
 	}
 }
