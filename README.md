@@ -36,7 +36,8 @@
 <p>
   As a default mp3s are downloaded to the mp3_files directory located in the same directory as the downloader script.  
   To change the setting run:
-  <code>go run downloader.go -c true [PATH TO DIRECTORY YOU WISH MUSIC TO SAVE TO] </code>
+  <code>go run downloader.go -c true</code>
+  You will be prompted to enter the path to the directory you wish to dump the music to.
   That will create a config.txt file which contains the path to the directory, you can change the path by running the command again.
   The go program will attempt to create the directory if it doesn't already exist
 </p>
@@ -56,3 +57,12 @@
 <p>
   The program expects the youtube urls to be formatted as such: https://www.youtube.com/watch?v=Ek0SgwWmF9w
 </p>
+
+<p><b>Binaries</b></p>
+<p>
+  Mac and Windows binaries have been placed in there respected folders.  They were provided incase you did not have golang installed.  
+  The Mac binary was compiled on 2.53 GHz Intel Core 2 Duo proccesor.  
+  The Windows binary on windows 64bit.
+  You can drag the binary out and place it on the top level directory (same place as the downloader.go file).
+</p>
+
