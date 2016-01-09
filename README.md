@@ -62,7 +62,12 @@
 <p>
   Mac and Windows binaries have been placed in there respected folders.  They were provided incase you did not have golang installed.  
   The Mac binary was compiled on 2.53 GHz Intel Core 2 Duo proccesor.  
-  The Windows binary on windows 64bit.
-  You can drag the binary out and place it on the top level directory (same place as the downloader.go file).
+  The Windows binaries on windows 64bit.
+  You can drag the binaries out and place it on the top level directory (same place as the downloader.go file).
+  <b>Windows Note: </b>If you don't have golang installed drag the binaries out into the top level directory (same place as the downloader.go file).
 </p>
+<p>
+  Supplement command <code>go run downloader</code> with <code>./downloader</code>
+</p>
+<p><b>Remember to run the setup file first</b></p>
 

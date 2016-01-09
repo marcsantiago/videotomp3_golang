@@ -235,7 +235,7 @@ func checkExt(ext string) []string {
 }
 
 func checkUrl(url string) bool {
-	if strings.Contains(url, "https://www.youtube.com/watch") == true {
+	if strings.Contains(url, "https://www.youtube.com/watch") == true || strings.Contains(url, "https://www.youtube.com/playlist") == true {
 		return true
 	}
 	return false
