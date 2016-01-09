@@ -175,6 +175,9 @@ func main() {
 		if runtime.GOOS == "windows" {
 			oldVideoPath = filepath.Join(path, vid)
 			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+			newVideoPath = strings.Replace(newVideoPath, "#", "", -1)
+
+
 		} else {
 			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
 			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
@@ -271,7 +274,7 @@ func downloadMP3(url string, mac bool) {
 	} else {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
-		tool := fmt.Sprintf("youtube-dl.exe --ignore-errors --extract-audio --audio-format mp3 " + url)
+		tool := fmt.Sprintf("youtube-dl.exe --ignore-errors --extract-audio --audio-format mp3 -o \"%%(title)s.%%(ext)s \" "+url)
 		cmd := exec.Command("cmd", "/C", tool)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
