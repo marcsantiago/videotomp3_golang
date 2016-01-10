@@ -36,7 +36,7 @@
 <p>
   As a default mp3s are downloaded to the mp3_files directory located in the same directory as the downloader script.  
   To change the setting run:
-  <code>go run downloader.go -c</code>
+  <code>go run downloader.go -c true</code>
   You will be prompted to enter the path to the directory you wish to dump the music to.
   That will create a config.txt file which contains the path to the directory, you can change the path by running the command again.
   The go program will attempt to create the directory if it doesn't already exist
@@ -74,4 +74,11 @@
   Supplement command <code>go run downloader</code> with <code>./downloader</code>
 </p>
 <p><b>Remember to run the setup file first</b></p>
+
+<p><b>Coming Soon!</b></p>
+<p>
+  <ul>
+    <li>download videos in parallel</li>
+  </ul>
+</p>
 

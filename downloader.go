@@ -57,8 +57,9 @@ func main() {
 	// SET COMMAND LINE PARSER
 	var fileMode = flag.String("f", "false", "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	var Setconfig = flag.Bool("c", false, "Allows the user to create a config.txt file which tells the program where to create mp3 directory")
-
+	var downloadVid = flag.String("v", "", "Download video from youtube, downloads one video at a time")
 	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
+
 	flag.Parse()
 
 	if *Setconfig == true {
@@ -66,11 +67,14 @@ func main() {
 		f, err := os.Create("config.txt")
 		checkFile(err)
 		defer f.Close()
-
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("Enter Folder Path, e.g. /User/Desktop/mp3_files: ")
+		if runtime.GOOS == "windows" {
+			fmt.Println("Make sure to please create the folder before entering it's path.")
+		} else {
+			fmt.Println("If the folder doesn't exist it will be created for you.")
+		}
+		fmt.Print("Enter Folder Path, no spaces in folder name e.g. /User/Desktop/mp3_files: ")
 		mp3DirectoryPath, _ := reader.ReadString('\n')
-		//MKDIR c:\FFMPEG
 
 		if runtime.GOOS == "windows" {
 			os.Mkdir(mp3DirectoryPath, 0777)
@@ -130,7 +134,6 @@ func main() {
 				}
 			}
 			wg.Wait()
-			fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 			fmt.Printf("Done converting videos\n")
 		}
 	} else {
@@ -155,36 +158,21 @@ func main() {
 					wg.Add(1)
 					go downloadMP3(url, true)
 				} else {
-					fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 					fmt.Printf("The url %s is not a proper youtube url\n The proper prefix is https://www.youtube.com/watch\n", url)
 				}
 			}
 		}
 		wg.Wait()
+		fmt.Printf("Done converting videos\n")
 	}
 
-	// move all files after downloading
-	if runtime.GOOS == "windows" {
-		os.Chdir(path)
-	} else {
-		os.Chdir(youtubeDirectoryPath)
+	if *downloadVid != "" {
+		//TODO
 	}
 
-	videos := checkExt(".mp3")
-	for _, vid := range videos {
-		if runtime.GOOS == "windows" {
-			oldVideoPath = filepath.Join(path, vid)
-			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
-			newVideoPath = strings.Replace(newVideoPath, "#", "", -1)
-
-
-		} else {
-			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
-			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
-		}
-		// move the file the the vidoes directory
-		os.Rename(oldVideoPath, newVideoPath)
-	}
+	fmt.Printf("Final Steps\n")
+	moveMP3s(path, youtubeDirectoryPath)
+	fmt.Printf("Check %s for your media\n", mp3DirectoryPath)
 
 }
 
@@ -260,7 +248,6 @@ func MaxParallelism() int {
 }
 
 func downloadMP3(url string, mac bool) {
-
 	if mac == true {
 		// change the directory to the directory of the youtube-dl
 		os.Chdir(youtubeDirectoryPath)
@@ -274,11 +261,35 @@ func downloadMP3(url string, mac bool) {
 	} else {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
-		tool := fmt.Sprintf("youtube-dl.exe --ignore-errors --extract-audio --audio-format mp3 -o \"%%(title)s.%%(ext)s \" "+url)
+		tool := fmt.Sprintf("youtube-dl.exe --ignore-errors --extract-audio --audio-format mp3 -o \"%%(title)s.%%(ext)s \" " + url)
 		cmd := exec.Command("cmd", "/C", tool)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
 	}
 	wg.Done()
+}
+
+func moveMP3s(path string, youtubeDirectoryPath string) {
+	// move all files after downloading
+	if runtime.GOOS == "windows" {
+		os.Chdir(path)
+	} else {
+		os.Chdir(youtubeDirectoryPath)
+	}
+
+	videos := checkExt(".mp3")
+	for _, vid := range videos {
+		if runtime.GOOS == "windows" {
+			oldVideoPath = filepath.Join(path, vid)
+			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+			newVideoPath = strings.Replace(newVideoPath, "#", "", -1)
+
+		} else {
+			oldVideoPath = filepath.Join(youtubeDirectoryPath, vid)
+			newVideoPath = filepath.Join(mp3DirectoryPath, vid)
+		}
+		// move the file the the vidoes directory
+		os.Rename(oldVideoPath, newVideoPath)
+	}
 }
