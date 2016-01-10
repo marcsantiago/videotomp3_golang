@@ -74,7 +74,7 @@
   <b>Mac</b> Supplement command <code>go run downloader</code> with <code>./downloader</code>
 </p>
 <p>
-  <b>Windwos</b> Supplement command <code>go run downloader</code> with <code>downloader.exe</code>
+  <b>Windows</b> Supplement command <code>go run downloader</code> with <code>downloader.exe</code>
 </p>
 <p><b>Remember to run the setup file first</b></p>
 
