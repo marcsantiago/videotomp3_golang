@@ -71,7 +71,10 @@
   <b>Windows Note: </b>If you don't have golang installed drag the binaries out into the top level directory (same place as the downloader.go file).
 </p>
 <p>
-  Supplement command <code>go run downloader</code> with <code>./downloader</code>
+  <b>Mac</b> Supplement command <code>go run downloader</code> with <code>./downloader</code>
+</p>
+<p>
+  <b>Windwos</b> Supplement command <code>go run downloader</code> with <code>downloader.exe</code>
 </p>
 <p><b>Remember to run the setup file first</b></p>
 
