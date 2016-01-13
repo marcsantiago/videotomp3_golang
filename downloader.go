@@ -349,7 +349,7 @@ func downloadVideo(url string, mac bool) {
 	} else {
 		// change path to top level where youtube-dl.exe lives
 		os.Chdir(path)
-		cmd := exec.Command("cmd", "/C", "youtube-dl.exe "+url)
+		cmd := exec.Command("cmd", "/C", "youtube-dl.exe -f "+url)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
