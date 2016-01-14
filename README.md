@@ -44,7 +44,7 @@ If you wish to download more then one mp3 at once use the command:
     
 You can also create a text file containing a list of links that you can download from.  Each url should be it's own line.  See the example_download_youtube_urls.txt for a formatting example. Use the command:
 
-    go run downloader.go -f [PATH TO FILE]
+    go run downloader.go -f [path\to\file]
 
 
 **Videos**
