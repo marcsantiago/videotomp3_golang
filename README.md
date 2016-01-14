@@ -18,11 +18,11 @@ If you are a **windows user** The program will attempt to create a folder in you
 To create a config file which points to the directories you wish your mp3s and videos to download to please use the command:
 
     go run downloader.go -c true
-You willbe prompted to enter the folder path of both the mp3 folder and video folder you wish to download your contents to.  Example path:
+You will be prompted to enter the folder path of both the mp3 folder and video folder you wish to download your contents to.  Example path:
 
     /User/Desktop/my_mp3s
 
-**Special Note: do not include spaced in your path**
+**Special Note: do not include spaces in your path**
 **Correct --> /User/Desktop/my_mp3s Incorrect --> /User/Desktop/my mp3s**
 
 
@@ -74,7 +74,7 @@ Example output:
         18          mp4       640x360     
         22          mp4       1280x720    (best)
 
-After you've determined which format you want use this command to download the video:
+After you've determined which format you want use (format code) use the command below to download the video:
 
     go run downloader.go -n 22 -d [youtube url]
     
