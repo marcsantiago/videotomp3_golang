@@ -246,8 +246,7 @@ func moveMusic() {
 	for _, m := range music {
 		oldMusicPath := filepath.Join(path, m)
 		newMusicPatth := filepath.Join(musicPath, m)
-		err := os.Rename(oldMusicPath, newMusicPatth)
-		fmt.Println(err, m)
+		os.Rename(oldMusicPath, newMusicPatth)
 	}
 }
 
@@ -259,8 +258,8 @@ func main() {
 	var fileMode = flag.Bool("file", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	var fpath = flag.String("path", "", "If file path, needed if fileMode is set to true")
 	var playlist = flag.Bool("playlist", false, "Download a playlist faster")
-	flag.Var(&videoStrings, "video", "Enter Youtube video url, each url needs the -v command before it")
-	flag.Var(&musicStrings, "music", "Enter Youtube video url, each url needs the -m command before it")
+	flag.Var(&videoStrings, "video", "Enter Youtube video url, each url needs the -video command before it")
+	flag.Var(&musicStrings, "music", "Enter Youtube music url, each url needs the -music command before it")
 	flag.Parse()
 
 	switch {
@@ -301,11 +300,11 @@ func main() {
 				panic(err)
 			}
 			for _, entry := range item.Entries {
-				if entry.Type == "url" {
-					wg.Add(1)
-					go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, true)
-				}
+				wg.Add(1)
+				go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, true)
 			}
+			wg.Wait()
+			moveVids()
 		} else if len(musicStrings) == 1 {
 			URL := musicStrings[0]
 			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
@@ -319,17 +318,16 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			for _, entry := range item.Entries {
-				if entry.Type == "url" {
-					wg.Add(1)
-					go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, false)
-				}
-			}
 
+			for _, entry := range item.Entries {
+				wg.Add(1)
+				go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, false)
+			}
+			wg.Wait()
+			moveMusic()
 		} else {
 			fmt.Println("Please enter a single video url -video myurl  or music url -music myurl in conjuction with this command")
 		}
-
 	case len(videoStrings) > 0:
 		for _, url := range videoStrings {
 			if checkURL(url) {
