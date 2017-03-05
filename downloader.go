@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"os/user"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"sync"
 )
@@ -21,6 +22,7 @@ var (
 	usr       *user.User
 	videoPath string
 	musicPath string
+	path, _   = os.Getwd()
 )
 
 // Created so that multiple inputs can be accecpted
@@ -150,6 +152,24 @@ func init() {
 	return
 }
 
+func checkExt(ext string) []string {
+	pathS, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	var files []string
+	filepath.Walk(pathS, func(path string, f os.FileInfo, _ error) error {
+		if !f.IsDir() {
+			r, err := regexp.MatchString(ext, f.Name())
+			if err == nil && r {
+				files = append(files, f.Name())
+			}
+		}
+		return nil
+	})
+	return files
+}
+
 func checkURL(URL string) bool {
 	if strings.Contains(URL, "https://www.youtube.com/watch") || strings.Contains(URL, "https://www.youtube.com/playlist") {
 		return true
@@ -188,6 +208,31 @@ func downloader(URL string, wg *sync.WaitGroup, video bool) {
 	return
 }
 
+func moveVids() {
+	// move all files after downloading
+	videos := checkExt(".m4a")
+	videos = append(videos, checkExt(".webm")...)
+	videos = append(videos, checkExt(".mp4")...)
+	videos = append(videos, checkExt(".3gp")...)
+	videos = append(videos, checkExt(".flv")...)
+	for _, vid := range videos {
+		oldVideoPath := filepath.Join(path, vid)
+		newVideoPath := filepath.Join(videoPath, vid)
+		os.Rename(oldVideoPath, newVideoPath)
+	}
+}
+
+func moveMusic() {
+	// move all files after downloading
+	music := checkExt(".mp3")
+	for _, m := range music {
+		oldMusicPath := filepath.Join(path, m)
+		newMusicPatth := filepath.Join(musicPath, m)
+		err := os.Rename(oldMusicPath, newMusicPatth)
+		fmt.Println(err, m)
+	}
+}
+
 func main() {
 	var musicStrings arrayFlags
 	var videoStrings arrayFlags
@@ -217,6 +262,7 @@ func main() {
 				}
 			}
 			wg.Wait()
+			moveMusic()
 		} else {
 			fmt.Println("File path not set")
 		}
@@ -228,6 +274,7 @@ func main() {
 			}
 		}
 		wg.Wait()
+		moveVids()
 	case len(musicStrings) > 0:
 		for _, url := range musicStrings {
 			if checkURL(url) {
@@ -236,6 +283,7 @@ func main() {
 			}
 		}
 		wg.Wait()
+		moveMusic()
 	}
 
 }
