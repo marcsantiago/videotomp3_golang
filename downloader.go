@@ -3,12 +3,15 @@ package main
 import (
 	"bytes"
 	"errors"
+	"flag"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"os/user"
 	"path/filepath"
 	"strings"
+	"sync"
 )
 
 var (
@@ -18,6 +21,18 @@ var (
 	videoPath string
 	musicPath string
 )
+
+// Created so that multiple inputs can be accecpted
+type arrayFlags []string
+
+func (i *arrayFlags) String() string {
+	return "my string representation"
+}
+
+func (i *arrayFlags) Set(value string) error {
+	*i = append(*i, value)
+	return nil
+}
 
 func init() {
 	defer out.Reset()
@@ -134,6 +149,43 @@ func init() {
 	return
 }
 
+func checkURL(URL string) bool {
+	if strings.Contains(URL, "https://www.youtube.com/watch") || strings.Contains(URL, "https://www.youtube.com/playlist") {
+		return true
+	}
+	return false
+}
+
+func downloader(URL string, wg *sync.WaitGroup) {
+	log.Println("test", URL)
+	defer wg.Done()
+
+}
+
 func main() {
+	var urlStrings arrayFlags
+	var wg sync.WaitGroup
+
+	var fileMode = flag.Bool("f", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
+	var formats = flag.String("v", "", "Retrieves video download formats")
+	var selectedFormat = flag.String("n", "", "Selected download format")
+	var downloadVid = flag.String("d", "", "Download Video")
+	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
+	flag.Parse()
+
+	switch {
+	case *fileMode:
+	case *formats != "":
+	case *selectedFormat != "":
+	case *downloadVid != "":
+	case len(urlStrings) > 0:
+		for _, url := range urlStrings {
+			if checkURL(url) {
+				wg.Add(1)
+				go downloader(url, &wg)
+			}
+		}
+		wg.Wait()
+	}
 
 }
