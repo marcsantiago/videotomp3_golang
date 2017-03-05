@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"errors"
 	"flag"
@@ -30,7 +31,7 @@ func (i *arrayFlags) String() string {
 }
 
 func (i *arrayFlags) Set(value string) error {
-	*i = append(*i, value)
+	*i = append(*i, strings.TrimSpace(value))
 	return nil
 }
 
@@ -156,33 +157,82 @@ func checkURL(URL string) bool {
 	return false
 }
 
-func downloader(URL string, wg *sync.WaitGroup) {
-	log.Println("test", URL)
+func downloader(URL string, wg *sync.WaitGroup, video bool) {
 	defer wg.Done()
+	defer out.Reset()
+	defer stderr.Reset()
+	if !video {
+		cmd := exec.Command("/usr/local/bin/youtube-dl", "--ignore-errors", "--extract-audio", "--audio-format", "mp3", "-o", "%(title)s.%(ext)s", URL)
+		cmd.Stdout = &out
+		cmd.Stderr = &stderr
+		err := cmd.Run()
+		if err != nil {
+			log.Println("Error Downloading", URL, err)
+		} else {
+			log.Println(out.String())
+			log.Println("")
+		}
+	} else {
+		cmd := exec.Command("/usr/local/bin/youtube-dl", "--ignore-errors", "-f", "bestvideo", URL)
+		cmd.Stdout = &out
+		cmd.Stderr = &stderr
+		err := cmd.Run()
+		if err != nil {
+			log.Println("Error Downloading", URL, err)
+		} else {
+			log.Println(out.String())
+			log.Println("")
+		}
+	}
 
+	return
 }
 
 func main() {
-	var urlStrings arrayFlags
+	var musicStrings arrayFlags
+	var videoStrings arrayFlags
 	var wg sync.WaitGroup
 
 	var fileMode = flag.Bool("f", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
-	var formats = flag.String("v", "", "Retrieves video download formats")
-	var selectedFormat = flag.String("n", "", "Selected download format")
-	var downloadVid = flag.String("d", "", "Download Video")
-	flag.Var(&urlStrings, "u", "Enter Youtube video url, each url needs the -u command before it")
+	var fpath = flag.String("p", "", "If file path, needed if fileMode is set to true")
+	flag.Var(&videoStrings, "v", "Enter Youtube video url, each url needs the -v command before it")
+	flag.Var(&musicStrings, "m", "Enter Youtube video url, each url needs the -m command before it")
 	flag.Parse()
 
 	switch {
 	case *fileMode:
-	case *formats != "":
-	case *selectedFormat != "":
-	case *downloadVid != "":
-	case len(urlStrings) > 0:
-		for _, url := range urlStrings {
+		if *fpath != "" {
+			f, err := os.Open(*fpath)
+			if err != nil {
+				panic(err)
+			}
+			defer f.Close()
+			scanner := bufio.NewScanner(f)
+			var url string
+			for scanner.Scan() {
+				url = strings.TrimSpace(scanner.Text())
+				if checkURL(url) {
+					wg.Add(1)
+					go downloader(url, &wg, false)
+				}
+			}
+			wg.Wait()
+		} else {
+			fmt.Println("File path not set")
+		}
+	case len(videoStrings) > 0:
+		for _, url := range videoStrings {
 			if checkURL(url) {
 				wg.Add(1)
-				go downloader(url, &wg)
+				go downloader(url, &wg, true)
+			}
+		}
+		wg.Wait()
+	case len(musicStrings) > 0:
+		for _, url := range musicStrings {
+			if checkURL(url) {
+				wg.Add(1)
+				go downloader(url, &wg, false)
 			}
 		}
 		wg.Wait()
