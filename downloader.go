@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -35,6 +36,23 @@ func (i *arrayFlags) String() string {
 func (i *arrayFlags) Set(value string) error {
 	*i = append(*i, strings.TrimSpace(value))
 	return nil
+}
+
+type playList struct {
+	Extractor    string `json:"extractor"`
+	Type         string `json:"_type"`
+	Title        string `json:"title"`
+	ExtractorKey string `json:"extractor_key"`
+	WebpageURL   string `json:"webpage_url"`
+	Entries      []struct {
+		URL   string `json:"url"`
+		Type  string `json:"_type"`
+		IeKey string `json:"ie_key"`
+		ID    string `json:"id"`
+		Title string `json:"title"`
+	} `json:"entries"`
+	ID                 string `json:"id"`
+	WebpageURLBasename string `json:"webpage_url_basename"`
 }
 
 func init() {
@@ -238,10 +256,11 @@ func main() {
 	var videoStrings arrayFlags
 	var wg sync.WaitGroup
 
-	var fileMode = flag.Bool("f", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
-	var fpath = flag.String("p", "", "If file path, needed if fileMode is set to true")
-	flag.Var(&videoStrings, "v", "Enter Youtube video url, each url needs the -v command before it")
-	flag.Var(&musicStrings, "m", "Enter Youtube video url, each url needs the -m command before it")
+	var fileMode = flag.Bool("file", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
+	var fpath = flag.String("path", "", "If file path, needed if fileMode is set to true")
+	var playlist = flag.Bool("playlist", false, "Download a playlist faster")
+	flag.Var(&videoStrings, "video", "Enter Youtube video url, each url needs the -v command before it")
+	flag.Var(&musicStrings, "music", "Enter Youtube video url, each url needs the -m command before it")
 	flag.Parse()
 
 	switch {
@@ -266,6 +285,51 @@ func main() {
 		} else {
 			fmt.Println("File path not set")
 		}
+	case *playlist:
+		var item playList
+		if len(videoStrings) == 1 {
+			URL := videoStrings[0]
+			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
+			cmd.Stdout = &out
+			cmd.Stderr = &stderr
+			err := cmd.Run()
+			if err != nil {
+				fmt.Println("something went wrong...")
+			}
+			err = json.Unmarshal(out.Bytes(), &item)
+			if err != nil {
+				panic(err)
+			}
+			for _, entry := range item.Entries {
+				if entry.Type == "url" {
+					wg.Add(1)
+					go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, true)
+				}
+			}
+		} else if len(musicStrings) == 1 {
+			URL := musicStrings[0]
+			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
+			cmd.Stdout = &out
+			cmd.Stderr = &stderr
+			err := cmd.Run()
+			if err != nil {
+				fmt.Println("something went wrong...")
+			}
+			err = json.Unmarshal(out.Bytes(), &item)
+			if err != nil {
+				panic(err)
+			}
+			for _, entry := range item.Entries {
+				if entry.Type == "url" {
+					wg.Add(1)
+					go downloader(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), &wg, false)
+				}
+			}
+
+		} else {
+			fmt.Println("Please enter a single video url -video myurl  or music url -music myurl in conjuction with this command")
+		}
+
 	case len(videoStrings) > 0:
 		for _, url := range videoStrings {
 			if checkURL(url) {
