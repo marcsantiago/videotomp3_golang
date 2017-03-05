@@ -6,17 +6,25 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"os/user"
+	"path/filepath"
 	"strings"
 )
 
 var (
-	out    bytes.Buffer
-	stderr bytes.Buffer
+	out       bytes.Buffer
+	stderr    bytes.Buffer
+	usr       *user.User
+	videoPath string
+	musicPath string
 )
 
 func init() {
 	defer out.Reset()
 	defer stderr.Reset()
+
+	usr, _ = user.Current()
+
 	// check that homebrew is installed
 	cmd := exec.Command("/usr/local/bin/brew", "help")
 	cmd.Stdout = &out
@@ -107,6 +115,21 @@ func init() {
 				println("Invalid input")
 			}
 		}
+	}
+
+	// ensure file system is in place
+	parent := filepath.Join(usr.HomeDir, "Desktop/YouTubeFiles")
+	if _, err := os.Stat(parent); os.IsNotExist(err) {
+		fmt.Printf("The folder %s was created for you\n", parent)
+		os.Mkdir(parent, 0755)
+	}
+	videoPath = filepath.Join(parent, "videos")
+	if _, err := os.Stat(videoPath); os.IsNotExist(err) {
+		os.Mkdir(videoPath, 0755)
+	}
+	musicPath = filepath.Join(parent, "music")
+	if _, err := os.Stat(musicPath); os.IsNotExist(err) {
+		os.Mkdir(musicPath, 0755)
 	}
 	return
 }
