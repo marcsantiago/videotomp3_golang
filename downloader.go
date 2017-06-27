@@ -127,7 +127,8 @@ func init() {
 				println("Invalid input")
 			}
 		}
-	} else if !strings.Contains(l, "ffmpeg") {
+	}
+	if !strings.Contains(l, "ffmpeg") {
 		var input string
 		fmt.Println("ffmpeg is needed, would you like to install it via homebrew")
 		for {
