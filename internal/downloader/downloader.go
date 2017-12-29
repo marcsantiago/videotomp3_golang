@@ -2,11 +2,16 @@ package downloader
 
 import (
 	"bytes"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
 	"sync"
+
+	log "github.com/marcsantiago/logger"
+)
+
+const (
+	logKey = "Downloader"
 )
 
 type Downloader struct {
@@ -34,7 +39,7 @@ func (d *Downloader) checkURL(URL string) bool {
 
 func (d *Downloader) Run(URL string, video bool) {
 	if !d.checkURL(URL) {
-		log.Fatal("url entered was not valid")
+		log.Fatal(logKey, "Url entered was not valid", "url", URL)
 	}
 
 	defer d.wg.Done()
@@ -44,16 +49,15 @@ func (d *Downloader) Run(URL string, video bool) {
 		cmd.Stderr = os.Stderr
 		err := cmd.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal(logKey, "music cmd", "error", err)
 		}
-
 	} else {
 		cmd := exec.Command("/usr/local/bin/youtube-dl", "--ignore-errors", "-f", "bestvideo", URL)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		err := cmd.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal(logKey, "video cmd", "error", err)
 		}
 	}
 	return

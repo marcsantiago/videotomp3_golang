@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"os/user"
@@ -14,6 +13,7 @@ import (
 	"strings"
 	"sync"
 
+	log "github.com/marcsantiago/logger"
 	"github.com/marcsantiago/videotomp3_golang/internal/downloader"
 	pl "github.com/marcsantiago/videotomp3_golang/internal/playlist"
 	"github.com/marcsantiago/videotomp3_golang/internal/setup"
@@ -24,6 +24,10 @@ var (
 	path, _   = os.Getwd()
 	videoPath string
 	musicPath string
+)
+
+const (
+	logKey = "Main"
 )
 
 // Created so that multiple inputs can be accecpted
@@ -41,17 +45,17 @@ func (i *arrayFlags) Set(value string) error {
 func init() {
 	err := setup.SetupBrew()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(logKey, "Issue with brew setup", "error", err)
 	}
 
 	err = setup.SetupYouTubeDL()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(logKey, "Issue with youtubedl setup", "error", err)
 	}
 
 	err = setup.SetupFFMPEG()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(logKey, "Issue with ffmpeg setup", "error", err)
 	}
 
 	usr, _ = user.Current()
@@ -76,7 +80,7 @@ func init() {
 func checkExt(ext string) (files []string) {
 	pathS, err := os.Getwd()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(logKey, "video cmd", "error", err)
 	}
 	filepath.Walk(pathS, func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {
@@ -133,7 +137,7 @@ func main() {
 		if *fpath != "" {
 			f, err := os.Open(*fpath)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Issue opening file", "error", err)
 			}
 			defer f.Close()
 			scanner := bufio.NewScanner(f)
@@ -144,8 +148,9 @@ func main() {
 				go downloader.Run(url, false)
 			}
 			if scanner.Err() != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Scanning", "error", err)
 			}
+
 			downloader.Wait()
 			moveMusic()
 		} else {
@@ -159,12 +164,14 @@ func main() {
 			cmd.Stdout = &downloader.Buf
 			err := cmd.Run()
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Issue getting playlist json", "error", err)
 			}
+
 			err = json.Unmarshal(downloader.Buf.Bytes(), &item)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Issue with json unmarshal", "error", err)
 			}
+
 			for _, entry := range item.Entries {
 				downloader.Add(1)
 				go downloader.Run(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), true)
@@ -172,22 +179,25 @@ func main() {
 			wg.Wait()
 			moveVids()
 		} else if len(musicStrings) == 1 {
+
 			URL := musicStrings[0]
 			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
 			cmd.Stdout = &downloader.Buf
 			err := cmd.Run()
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Issue getting music", "error", err)
 			}
+
 			err = json.Unmarshal(downloader.Buf.Bytes(), &item)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal(logKey, "Issue with json unmarshal", "error", err)
 			}
 
 			for _, entry := range item.Entries {
 				downloader.Add(1)
 				go downloader.Run(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), false)
 			}
+
 			downloader.Wait()
 			moveMusic()
 		} else {
