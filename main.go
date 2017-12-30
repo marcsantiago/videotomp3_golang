@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"sync"
 
 	log "github.com/marcsantiago/logger"
 	"github.com/marcsantiago/videotomp3_golang/internal/downloader"
@@ -119,9 +118,8 @@ func moveMusic() {
 }
 
 func main() {
-	var musicStrings arrayFlags
-	var videoStrings arrayFlags
-	var wg sync.WaitGroup
+	var musicStrings, videoStrings arrayFlags
+	var downloader downloader.Downloader
 
 	var fileMode = flag.Bool("file", false, "If file mode is set to true then it will look for youtube urls serperated by a new line in the files path")
 	var fpath = flag.String("path", "", "If file path, needed if fileMode is set to true")
@@ -130,92 +128,99 @@ func main() {
 	flag.Var(&musicStrings, "music", "Enter Youtube music url, each url needs the -music command before it")
 	flag.Parse()
 
-	var downloader downloader.Downloader
+	conf := struct {
+		fileMode     bool
+		filePath     string
+		playlistMode bool
+		videos       arrayFlags
+		music        arrayFlags
+	}{
+		fileMode:     *fileMode,
+		filePath:     *fpath,
+		playlistMode: *playlist,
+		videos:       videoStrings,
+		music:        musicStrings,
+	}
 
-	switch {
-	case *fileMode:
-		if *fpath != "" {
-			f, err := os.Open(*fpath)
-			if err != nil {
-				log.Fatal(logKey, "Issue opening file", "error", err)
-			}
-			defer f.Close()
-			scanner := bufio.NewScanner(f)
-			var url string
-			for scanner.Scan() {
-				url = strings.TrimSpace(scanner.Text())
-				downloader.Add(1)
-				go downloader.Run(url, false)
-			}
-			if scanner.Err() != nil {
-				log.Fatal(logKey, "Scanning", "error", err)
-			}
-
-			downloader.Wait()
-			moveMusic()
-		} else {
-			fmt.Println("File path not set")
+	list := struct {
+		urls  []string
+		video bool
+	}{}
+	if conf.fileMode {
+		if conf.filePath == "" {
+			log.Fatal(logKey, "File path not set")
 		}
-	case *playlist:
-		var item pl.PlayList
-		if len(videoStrings) == 1 {
-			URL := videoStrings[0]
-			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
-			cmd.Stdout = &downloader.Buf
-			err := cmd.Run()
-			if err != nil {
-				log.Fatal(logKey, "Issue getting playlist json", "error", err)
-			}
+		f, err := os.Open(*fpath)
+		if err != nil {
+			log.Fatal(logKey, "Issue opening file", "error", err)
+		}
+		defer f.Close()
 
-			err = json.Unmarshal(downloader.Buf.Bytes(), &item)
-			if err != nil {
-				log.Fatal(logKey, "Issue with json unmarshal", "error", err)
-			}
+		scanner := bufio.NewScanner(f)
 
-			for _, entry := range item.Entries {
-				downloader.Add(1)
-				go downloader.Run(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), true)
-			}
-			wg.Wait()
-			moveVids()
-		} else if len(musicStrings) == 1 {
+		for scanner.Scan() {
+			url := strings.TrimSpace(scanner.Text())
+			list.urls = append(list.urls, url)
+		}
+		if scanner.Err() != nil {
+			log.Fatal(logKey, "Scanning", "error", err)
+		}
+	}
 
-			URL := musicStrings[0]
-			cmd := exec.Command("/usr/local/bin/youtube-dl", URL, "--flat-playlist", "--dump-single-json")
-			cmd.Stdout = &downloader.Buf
-			err := cmd.Run()
-			if err != nil {
-				log.Fatal(logKey, "Issue getting music", "error", err)
-			}
-
-			err = json.Unmarshal(downloader.Buf.Bytes(), &item)
-			if err != nil {
-				log.Fatal(logKey, "Issue with json unmarshal", "error", err)
-			}
-
-			for _, entry := range item.Entries {
-				downloader.Add(1)
-				go downloader.Run(fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL), false)
-			}
-
-			downloader.Wait()
-			moveMusic()
-		} else {
+	if conf.playlistMode {
+		if len(conf.videos) < 1 && len(conf.music) < 1 {
 			fmt.Println("Please enter a single video url -video myurl  or music url -music myurl in conjuction with this command")
+			return
 		}
-	case len(videoStrings) > 0:
-		for _, url := range videoStrings {
+		var item pl.PlayList
+		var u string
+		if len(conf.videos) == 1 {
+			u = conf.videos[0]
+			list.video = true
+		} else if len(conf.music) == 1 {
+			u = conf.music[0]
+		}
+
+		cmd := exec.Command("/usr/local/bin/youtube-dl", u, "--flat-playlist", "--dump-single-json")
+		cmd.Stdout = &downloader.Buf
+		err := cmd.Run()
+		if err != nil {
+			log.Fatal(logKey, "Issue getting playlist json", "error", err)
+		}
+
+		err = json.Unmarshal(downloader.Buf.Bytes(), &item)
+		if err != nil {
+			log.Fatal(logKey, "Issue with json unmarshal", "error", err)
+		}
+
+		for _, entry := range item.Entries {
+			list.urls = append(list.urls, fmt.Sprintf("https://www.youtube.com/watch?v=%s", entry.URL))
+		}
+	}
+
+	if len(conf.videos) > 0 {
+		list.video = true
+		for _, url := range conf.videos {
+			list.urls = append(list.urls, url)
+		}
+	}
+
+	if len(conf.music) > 0 {
+		for _, url := range conf.music {
+			list.urls = append(list.urls, url)
+		}
+	}
+
+	if len(list.urls) > 0 {
+		for _, url := range list.urls {
 			downloader.Add(1)
-			go downloader.Run(url, true)
+			go downloader.Run(url, list.video)
 		}
 		downloader.Wait()
-		moveVids()
-	case len(musicStrings) > 0:
-		for _, url := range musicStrings {
-			downloader.Add(1)
-			go downloader.Run(url, false)
+		if list.video {
+			moveVids()
+			return
 		}
-		downloader.Wait()
 		moveMusic()
 	}
 
